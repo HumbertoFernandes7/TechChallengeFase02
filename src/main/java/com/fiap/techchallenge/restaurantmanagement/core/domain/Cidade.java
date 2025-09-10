@@ -11,4 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Cidade {
     private Long id;
+    private String nome;
+
 }
