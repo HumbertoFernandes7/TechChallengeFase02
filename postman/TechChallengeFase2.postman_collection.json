@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "97366653-75af-4c36-8ef9-123228732fe0",
+		"name": "TechChallengeFase2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44544515",
+		"_collection_link": "https://galactic-crater-875331.postman.co/workspace/My-Workspace~e289c4cc-1b81-4af6-be12-5a36d9612bd5/collection/44544515-97366653-75af-4c36-8ef9-123228732fe0?action=share&source=collection_link&creator=44544515"
+	},
+	"item": [
+		{
+			"name": "cadastra usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"123456789\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"humberto atualizado\",\r\n    \"email\": \"humberto2@email.com\",\r\n    \"senha\": \"12343\",\r\n    \"tipo\" : \"CLIENTE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar todos os usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar usuario pelo id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar usuario pelo id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
