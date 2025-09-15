@@ -1,0 +1,30 @@
+package com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario;
+
+import com.fiap.techchallenge.restaurantmanagement.application.usecase.mapper.UsuarioMapper;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class UpdateUsuarioUseCase {
+
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
+
+    public Usuario execute(Long id, Usuario usuarioAtualizado){
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado."));
+
+        usuarioEntity.setNome(usuarioAtualizado.getNome());
+        usuarioEntity.setEmail(usuarioAtualizado.getEmail());
+        usuarioEntity.setTipo(usuarioAtualizado.getTipo());
+        usuarioEntity.setSenha(usuarioAtualizado.getSenha());
+
+        UsuarioEntity usuarioSalvo = usuarioRepository.save(usuarioEntity);
+        return usuarioMapper.toDomain(usuarioSalvo);
+    }
+}
