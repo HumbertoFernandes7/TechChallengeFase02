@@ -1,7 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario;
 
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGateway;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +8,9 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class DeleteUsuarioUseCase {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioGateway usuarioGateway;
 
     public void execute(Long id) {
-        if (!usuarioRepository.existsById(id)) {
-            throw new EntityNotFoundException("Usuário com o id " + id + " não encontrado.");
-        }
-        usuarioRepository.deleteById(id);
+         usuarioGateway.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.fiap.techchallenge.restaurantmanagement.application.usecase.mapper;
+package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper;
 
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;

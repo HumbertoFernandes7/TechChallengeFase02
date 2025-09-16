@@ -35,7 +35,7 @@ public class UsuarioApiController implements IUsuarioApiController {
 
     @Override
     public ResponseEntity<UsuarioResponse> getById(Long id) {
-        Usuario usuario = findUsuarioUseCase.findById(id);
+        Usuario usuario = findUsuarioUseCase.execute(id);
         return ResponseEntity.ok(usuarioWebMapper.toResponse(usuario));
     }
 
