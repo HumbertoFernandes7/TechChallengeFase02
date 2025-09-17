@@ -3,6 +3,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.UsuarioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -60,5 +61,15 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
             throw new EntityNotFoundException("Usuário com o id " + id + " não encontrado.");
         }
         usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Usuario changePassword(Long id, NovaSenhaRequest novaSenha) {
+        if(novaSenha.getNovaSenha().equals(novaSenha.getRepetirNovaSenha())){
+            Usuario usuario = findById(id);
+            usuario.changePassword(novaSenha.getNovaSenha());
+            return save(usuario);
+        }
+       throw new IllegalArgumentException("NovaSenha e RepetirNovaSenha devem ser iguais");
     }
 }

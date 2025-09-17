@@ -27,10 +27,13 @@ public class Usuario {
         this.senha = validarSenha(senha);
     }
 
-    private void vinculaEndereco(Endereco endereco){
+    public void vinculaEndereco(Endereco endereco){
         this.endereco = endereco;
     }
 
+    public void changePassword(String senha){
+        this.senha = validarSenha(senha);
+    }
 
     private String validarSenha(String senha){
         if(senha == null || senha.length() < 8){
