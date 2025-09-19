@@ -1,9 +1,11 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web.dto;
 
-import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -15,13 +17,12 @@ public class RestauranteRequest {
     @NotBlank(message = "O tipo de cozinha é obrigatório.")
     private String tipoCozinha;
 
-    @NotBlank(message = "O horário de abertura é obrigatório.")
-    private String horarioAbertura;
+    @NotNull(message = "O horário de abertura é obrigatório.")
+    private LocalTime horarioAbertura;
 
-    @NotBlank(message = "O horário de fechamento é obrigatório.")
-    private String horarioFechamento;
+    @NotNull(message = "O horário de fechamento é obrigatório.")
+    private LocalTime horarioFechamento;
 
-    @NotBlank(message = "Um usuario deve ser associado ao restaurante.")
-    private Usuario donoRestaurante;
-
+    @NotNull(message = "Um usuario deve ser associado ao restaurante.")
+    private Long donoRestauranteId;
 }

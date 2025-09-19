@@ -11,6 +11,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class Restaurante {
 
+    private Long id;
+
     private String nome;
 
     private Endereco endereco;
@@ -24,4 +26,13 @@ public class Restaurante {
     private Usuario donoRestaurante;
 
     private String cardapio;
+
+    public Restaurante(String nome, String tipoCozinha, LocalTime horarioAbertura, LocalTime horarioFechamento, Usuario donoRestaurante) {
+        this.nome = nome;
+        this.tipoCozinha = tipoCozinha;
+        this.horarioAbertura = horarioAbertura;
+        this.horarioFechamento = horarioFechamento;
+        this.donoRestaurante = donoRestaurante;
+    }
+
 }

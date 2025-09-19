@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,15 +22,19 @@ public class RestauranteEntity {
 
     private String nome;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_restaurante_id")
+    private EnderecoEntity endereco;
+
     private String tipoCozinha;
 
-    private String horarioAbertura;
+    private LocalTime horarioAbertura;
 
-    private String horarioFechamento;
+    private LocalTime horarioFechamento;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-    private UsuarioEntity usuario;
+    @JoinColumn(name = "dono_restaurante_id")
+    private UsuarioEntity donoRestaurante;
 
     private String cardapio;
 

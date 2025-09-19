@@ -3,6 +3,8 @@ package com.fiap.techchallenge.restaurantmanagement.infra.web.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalTime;
+
 @Getter
 @Setter
 public class RestauranteResponse {
@@ -11,14 +13,15 @@ public class RestauranteResponse {
 
     private String nome;
 
+    private String endereco;
+
     private String tipoCozinha;
 
-    private String horarioAbertura;
+    private LocalTime horarioAbertura;
 
-    private String horarioFechamento;
+    private LocalTime horarioFechamento;
 
     private UsuarioResponse donoRestaurante;
 
     private String cardapio;
-
 }
