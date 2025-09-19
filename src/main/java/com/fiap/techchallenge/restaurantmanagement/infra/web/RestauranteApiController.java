@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,36 +33,37 @@ public class RestauranteApiController implements IRestauranteApiController {
 
     private final FindUsuarioUseCase findUsuarioUseCase;
 
-
-
     @Override
     public ResponseEntity<RestauranteResponse> create(RestauranteRequest restauranteRequest) {
         Usuario usuario = findUsuarioUseCase.execute(restauranteRequest.getDonoRestauranteId());
-
         Restaurante restaurante = restauranteWebMapper.toDomain(restauranteRequest, usuario);
-
         Restaurante restauranteSalvo = createRestauranteUseCase.execute(restaurante);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(restauranteWebMapper.toResponse(restauranteSalvo));
     }
 
     @Override
     public ResponseEntity<RestauranteResponse> getById(Long id) {
-        return null;
+        Restaurante restaurante = findRestauranteUseCase.execute(id);
+        return ResponseEntity.ok(restauranteWebMapper.toResponse(restaurante));
     }
 
     @Override
     public ResponseEntity<List<RestauranteResponse>> listAll() {
-        return null;
+        List<Restaurante> restaurantes = listRestauranteUseCase.execute();
+        return ResponseEntity.ok(restauranteWebMapper.toResponseList(restaurantes));
     }
 
     @Override
     public ResponseEntity<RestauranteResponse> update(Long id, RestauranteRequest restauranteRequest) {
-        return null;
+        Usuario usuario = findUsuarioUseCase.execute(restauranteRequest.getDonoRestauranteId());
+        Restaurante restaurante = restauranteWebMapper.toDomain(restauranteRequest, usuario);
+        Restaurante restauranteAtualizado = updateRestauranteUseCase.execute(id, restaurante);
+        return ResponseEntity.ok(restauranteWebMapper.toResponse(restauranteAtualizado));
     }
 
     @Override
     public ResponseEntity<Void> delete(Long id) {
-        return null;
+        deleteRestauranteUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }

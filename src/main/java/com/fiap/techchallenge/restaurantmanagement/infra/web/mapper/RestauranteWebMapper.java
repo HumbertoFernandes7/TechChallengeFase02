@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class RestauranteWebMapper {
@@ -27,5 +29,9 @@ public class RestauranteWebMapper {
 
     public RestauranteResponse toResponse(Restaurante restaurante) {
         return modelMapper.map(restaurante, RestauranteResponse.class);
+    }
+
+    public List<RestauranteResponse> toResponseList(List<Restaurante> restaurantes) {
+        return restaurantes.stream().map(this::toResponse).toList();
     }
 }

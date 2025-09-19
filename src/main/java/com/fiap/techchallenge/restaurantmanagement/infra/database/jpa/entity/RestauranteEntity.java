@@ -32,7 +32,7 @@ public class RestauranteEntity {
 
     private LocalTime horarioFechamento;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "dono_restaurante_id")
     private UsuarioEntity donoRestaurante;
 
