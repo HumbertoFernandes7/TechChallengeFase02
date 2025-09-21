@@ -3,9 +3,9 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
-import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.UsuarioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -49,7 +49,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
 
     @Override
     public List<Usuario> findAll() {
-        return  usuarioRepository.findAll()
+        return usuarioRepository.findAll()
                 .stream()
                 .map(usuarioMapper::toDomain)
                 .collect(Collectors.toList());
@@ -65,11 +65,11 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
 
     @Override
     public Usuario changePassword(Long id, NovaSenhaRequest novaSenha) {
-        if(novaSenha.getNovaSenha().equals(novaSenha.getRepetirNovaSenha())){
+        if (novaSenha.getNovaSenha().equals(novaSenha.getRepetirNovaSenha())) {
             Usuario usuario = findById(id);
             usuario.changePassword(novaSenha.getNovaSenha());
             return save(usuario);
         }
-       throw new IllegalArgumentException("NovaSenha e RepetirNovaSenha devem ser iguais");
+        throw new IllegalArgumentException("NovaSenha e RepetirNovaSenha devem ser iguais");
     }
 }
