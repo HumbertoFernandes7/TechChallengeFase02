@@ -2,7 +2,6 @@ package com.fiap.techchallenge.restaurantmanagement.infra.web.mapper;
 
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.RestauranteEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.RestauranteRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.RestauranteResponse;
 import lombok.AllArgsConstructor;
@@ -17,13 +16,13 @@ public class RestauranteWebMapper {
 
     private final ModelMapper modelMapper;
 
-    public Restaurante toDomain(RestauranteRequest restauranteRequest, Usuario usuario) {
+    public Restaurante toDomain(RestauranteRequest restauranteRequest, Usuario donoRestaurante) {
         return new Restaurante(
                 restauranteRequest.getNome(),
                 restauranteRequest.getTipoCozinha(),
                 restauranteRequest.getHorarioAbertura(),
                 restauranteRequest.getHorarioFechamento(),
-                usuario
+                donoRestaurante
                 );
     }
 

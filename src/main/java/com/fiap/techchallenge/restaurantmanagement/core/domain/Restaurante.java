@@ -34,5 +34,4 @@ public class Restaurante {
         this.horarioFechamento = horarioFechamento;
         this.donoRestaurante = donoRestaurante;
     }
-
 }

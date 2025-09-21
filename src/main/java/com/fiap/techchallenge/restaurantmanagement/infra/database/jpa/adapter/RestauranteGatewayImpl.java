@@ -34,7 +34,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
             RestauranteEntity restauranteSalvo = restauranteRepository.save(restauranteEntity);
             return restauranteMapper.toDomain(restauranteSalvo);
         }
-        throw new RuntimeException("Usuario associado não tem permissão para ser dono do restaurante");
+        throw new RuntimeException("Usuário associado não tem permissão para ser dono do restaurante");
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper;
 
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
-import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.RestauranteEntity;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
