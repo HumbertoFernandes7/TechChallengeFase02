@@ -38,6 +38,5 @@ public class RestauranteEntity {
     private UsuarioEntity donoRestaurante;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cardapio_id")
     private CardapioEntity cardapio;
 }
