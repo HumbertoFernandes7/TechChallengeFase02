@@ -23,5 +23,4 @@ public class RestauranteResponse {
 
     private UsuarioResponse donoRestaurante;
 
-    private String cardapio;
 }

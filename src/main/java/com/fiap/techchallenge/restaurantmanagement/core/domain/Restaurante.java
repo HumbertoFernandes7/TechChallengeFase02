@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -25,7 +27,7 @@ public class Restaurante {
 
     private Usuario donoRestaurante;
 
-    private String cardapio;
+    private Cardapio cardapio;
 
     public Restaurante(String nome, String tipoCozinha, LocalTime horarioAbertura, LocalTime horarioFechamento, Usuario donoRestaurante) {
         this.nome = nome;
