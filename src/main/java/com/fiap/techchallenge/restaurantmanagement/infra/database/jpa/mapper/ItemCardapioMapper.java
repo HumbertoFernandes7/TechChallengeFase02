@@ -17,4 +17,15 @@ public class ItemCardapioMapper {
                 itemCardapioEntity.getFotoPrato()
         );
     }
+
+    public ItemCardapioEntity toEntity(ItemCardapio itemCardapio) {
+        ItemCardapioEntity itemCardapioEntity = new ItemCardapioEntity();
+        itemCardapioEntity.setId(itemCardapio.getId());
+        itemCardapioEntity.setNome(itemCardapio.getNome());
+        itemCardapioEntity.setDescricao(itemCardapio.getDescricao());
+        itemCardapioEntity.setPreco(itemCardapio.getPreco());
+        itemCardapioEntity.setDisponibilidade(itemCardapio.isDisponibilidade());
+        itemCardapioEntity.setFotoPrato(itemCardapio.getFotoPrato());
+        return itemCardapioEntity;
+    }
 }
