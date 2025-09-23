@@ -15,6 +15,5 @@ public class Estado {
     private Long id;
     private String nome;
     private String sigla;
-    private List<Endereco> endereco;
-
+    private List<Cidade> cidades;
 }
