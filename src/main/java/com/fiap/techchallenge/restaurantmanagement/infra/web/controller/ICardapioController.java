@@ -21,9 +21,6 @@ public interface ICardapioController {
     @PostMapping
     ResponseEntity<CardapioResponse> insert(@RequestBody @Valid CardapioRequest cardapio);
 
-    @PutMapping
-    ResponseEntity<CardapioResponse> update(@RequestBody @Valid CardapioRequest cardapio);
-
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
 }

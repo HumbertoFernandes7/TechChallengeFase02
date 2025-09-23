@@ -8,8 +8,6 @@ public interface CardapioGateway {
 
     Cardapio save(Cardapio cardapio);
 
-    Cardapio update(Long id, Cardapio cardapioAtualizado);
-
     Cardapio findById(Long id);
 
     List<Cardapio> findAll();

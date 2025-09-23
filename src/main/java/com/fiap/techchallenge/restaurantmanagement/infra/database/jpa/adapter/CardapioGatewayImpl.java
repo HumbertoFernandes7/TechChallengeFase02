@@ -27,12 +27,6 @@ public class CardapioGatewayImpl implements CardapioGateway {
     }
 
     @Override
-    public Cardapio update(Long id, Cardapio cardapioAtualizado) {
-        CardapioEntity cardapioEntity = cardapioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cardápio não encontrado"));
-        return null;
-    }
-
-    @Override
     public Cardapio findById(Long id) {
         return cardapioRepository.findById(id)
                 .map(cardapioMapper::toDomain)

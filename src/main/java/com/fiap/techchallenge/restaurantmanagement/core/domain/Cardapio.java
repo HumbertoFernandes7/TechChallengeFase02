@@ -19,12 +19,4 @@ public class Cardapio {
    public Cardapio(Restaurante restaurante) {
        this.restaurante = restaurante;
    }
-
-   public void adicionarItem(ItemCardapio item) {
-       this.itensCardapio.add(item);
-   }
-
-   public void removerItem(ItemCardapio item){
-       this.itensCardapio.remove(item);
-   }
 }

@@ -21,7 +21,6 @@ import java.util.List;
 public class CardapioController implements ICardapioController {
 
     private final CreateCardapioUseCase createCardapioUseCase;
-    private final UpdateCardapioUseCase updateCardapioUseCase;
     private final ListCardapioUseCase listCardapioUseCase;
     private final FindCardapioUseCase findCardapioUseCase;
     private final DeleteCardapioUseCase deleteCardapioUseCase;
@@ -48,11 +47,6 @@ public class CardapioController implements ICardapioController {
         Cardapio cardapio = cardapioWebMapper.toDomain(restaurante);
         Cardapio cardapioSalvo = createCardapioUseCase.execute(cardapio);
         return ResponseEntity.status(HttpStatus.CREATED).body(cardapioWebMapper.toResponse(cardapioSalvo));
-    }
-
-    @Override
-    public ResponseEntity<CardapioResponse> update(CardapioRequest cardapio) {
-        return null;
     }
 
     @Override
