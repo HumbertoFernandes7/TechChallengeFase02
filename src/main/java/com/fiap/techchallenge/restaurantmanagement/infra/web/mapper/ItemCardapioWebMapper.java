@@ -1,16 +1,18 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web.mapper;
 
+import com.fiap.techchallenge.restaurantmanagement.core.domain.Cardapio;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.ItemCardapio;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.ItemCardapioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.ItemCardapioResponse;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ItemCardapioWebMapper {
 
     private final ModelMapper modelMapper;

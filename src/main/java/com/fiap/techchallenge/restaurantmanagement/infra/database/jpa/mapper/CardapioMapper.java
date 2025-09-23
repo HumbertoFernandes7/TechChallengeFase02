@@ -3,6 +3,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Cardapio;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CardapioEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

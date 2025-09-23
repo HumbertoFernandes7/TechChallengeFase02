@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ItemCardapioGateway {
 
-    ItemCardapio save(ItemCardapio  itemCardapio);
+    ItemCardapio save(ItemCardapio itemCardapio, Cardapio cardapio);
 
     ItemCardapio  update(Long id, ItemCardapio  itemCardapioAtualizado);
 

@@ -13,7 +13,7 @@ public class CreateItemCardapioUseCase {
 
     private final ItemCardapioGateway itemCardapioGateway;
 
-    public ItemCardapio execute(ItemCardapio itemCardapio) {
-       return itemCardapioGateway.save(itemCardapio);
+    public ItemCardapio execute(ItemCardapio itemCardapio, Cardapio cardapio) {
+       return itemCardapioGateway.save(itemCardapio, cardapio);
     }
 }

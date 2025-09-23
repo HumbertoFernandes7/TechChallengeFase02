@@ -4,10 +4,12 @@ import com.fiap.techchallenge.restaurantmanagement.application.usecase.cardapio.
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.itemCardapio.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Cardapio;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.ItemCardapio;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.ItemCardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.ItemCardapioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.ItemCardapioResponse;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.ItemCardapioWebMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/item")
-public class ItemCardapioApiControler implements iItemCardapioApiController {
+public class ItemCardapioApiController implements iItemCardapioApiController {
 
     private final CreateItemCardapioUseCase createItemCardapioUseCase;
     private final UpdateItemCardapioUseCase updateItemCardapioUseCase;
@@ -28,8 +30,8 @@ public class ItemCardapioApiControler implements iItemCardapioApiController {
 
     private final FindCardapioUseCase findCardapioUseCase;
 
-
     private final ItemCardapioWebMapper itemCardapioWebMapper;
+    private final ItemCardapioMapper itemCardapioMapper;
 
 
     @Override
@@ -48,8 +50,7 @@ public class ItemCardapioApiControler implements iItemCardapioApiController {
     public ResponseEntity<ItemCardapioResponse> insert(ItemCardapioRequest itemCardapioRequest) {
         Cardapio cardapio = findCardapioUseCase.execute(itemCardapioRequest.getCardapioId());
         ItemCardapio itemCardapio = itemCardapioWebMapper.toDomain(itemCardapioRequest);
-        ItemCardapio itemCardapioSalvo = createItemCardapioUseCase.execute(itemCardapio);
-
+        ItemCardapio itemCardapioSalvo = createItemCardapioUseCase.execute(itemCardapio, cardapio);
         return ResponseEntity.status(HttpStatus.CREATED).body(itemCardapioWebMapper.toResponse(itemCardapioSalvo));
     }
 

@@ -1,11 +1,12 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.ItemCardapioGateway;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.Cardapio;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.ItemCardapio;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.ItemCardapioEntity;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.ItemCardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.ItemCardapioRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,13 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
     private final ItemCardapioRepository itemCardapioRepository;
 
     private final ItemCardapioMapper itemCardapioMapper;
-    private final UsuarioRepository usuarioRepository;
+
+    private final CardapioMapper cardapioMapper;
 
     @Override
-    public ItemCardapio save(ItemCardapio itemCardapio) {
+    public ItemCardapio save(ItemCardapio itemCardapio, Cardapio cardapio) {
         ItemCardapioEntity itemCardapioEntity = itemCardapioMapper.toEntity(itemCardapio);
+        itemCardapioEntity.setCardapio(cardapioMapper.toEntity(cardapio));
         ItemCardapioEntity itemCardapioSalvo = itemCardapioRepository.save(itemCardapioEntity);
         return itemCardapioMapper.toDomain(itemCardapioSalvo);
     }
