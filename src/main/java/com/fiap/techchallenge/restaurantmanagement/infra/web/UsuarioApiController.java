@@ -25,7 +25,6 @@ public class UsuarioApiController implements IUsuarioApiController {
     private final ListUsuarioUseCase listUsuarioUseCase;
     private final UsuarioWebMapper usuarioWebMapper;
 
-
     @Override
     public ResponseEntity<UsuarioResponse> create(UsuarioRequest usuarioRequest) {
         Usuario usuario = usuarioWebMapper.toDomain(usuarioRequest);

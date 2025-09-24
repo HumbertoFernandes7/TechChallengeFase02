@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EnderecoGateway {
 
-    EnderecoGateway save(Endereco endereco);
+    Endereco save(Endereco endereco);
 
     Endereco update(Long id, Endereco enderecoAtualizado);
 

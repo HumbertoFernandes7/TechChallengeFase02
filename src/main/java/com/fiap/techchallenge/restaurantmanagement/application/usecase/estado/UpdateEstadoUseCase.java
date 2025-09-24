@@ -13,5 +13,4 @@ public class UpdateEstadoUseCase {
     public Estado execute(Long id, Estado estadoAtualizado){
         return estadoGateway.update(id, estadoAtualizado);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web;
 
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-public interface ICidadeApiController<T> {
+public interface IEstadoApiController<T> {
 
     @GetMapping
     ResponseEntity<List<T>> listAll();
@@ -25,4 +26,3 @@ public interface ICidadeApiController<T> {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
 }
-
