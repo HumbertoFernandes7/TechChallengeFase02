@@ -20,8 +20,8 @@ public interface IEstadoApiController<T> {
     @PostMapping
     ResponseEntity<Void> insert(@RequestBody @Valid T t);
 
-    @PutMapping
-    ResponseEntity<Void> update(@PathVariable Long id,@RequestBody @Valid T t);
+    @PutMapping("/{id}")
+    ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid T t);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);

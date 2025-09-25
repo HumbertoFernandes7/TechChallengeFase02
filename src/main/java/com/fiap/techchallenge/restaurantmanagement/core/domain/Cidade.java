@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.core.domain;
 
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,6 @@ public class Cidade {
     private String nome;
     private Estado estado;
     private List<Endereco> enderecos;
+
+    public EnderecoEntity
 }

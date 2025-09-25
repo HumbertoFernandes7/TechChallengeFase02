@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EstadoMapper {
+    private final CidadeMapper cidadeMapper = new CidadeMapper();
 
     public Estado toDomain(EstadoEntity estadoEntity) {
         if (estadoEntity == null) {
@@ -17,13 +18,13 @@ public class EstadoMapper {
                 estadoEntity.getId(),
                 estadoEntity.getNome(),
                 estadoEntity.getSigla(),
-                null);
+                estadoEntity.getCidades());
     }
 
     public EstadoEntity toEntity(Estado estado) {
         if (estado == null) {
             return null;
         }
-        return new EstadoEntity(estado.getId(), estado.getNome(), estado.getSigla(), null);
+        return new EstadoEntity(estado.getId(), estado.getNome(), estado.getSigla(), estado.getCidades());
     }
 }

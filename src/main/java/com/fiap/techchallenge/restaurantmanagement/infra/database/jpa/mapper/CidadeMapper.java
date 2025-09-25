@@ -13,7 +13,7 @@ public class CidadeMapper {
         }
         //TODO: melhorar os null
         return new Cidade(cidadeEntity.getId(),
-                cidadeEntity.getNome(), null, null);
+                cidadeEntity.getNome(), cidadeEntity.getEstado(), cidadeEntity.getEnderecos());
 
     }
 
@@ -21,6 +21,6 @@ public class CidadeMapper {
         if (cidade == null) {
             return null;
         }
-        return new CidadeEntity(cidade.getId(), cidade.getNome(), null, null);
+        return new CidadeEntity(cidade.getId(), cidade.getNome(), cidade.getEstado(), cidade.getEnderecos());
     }
 }

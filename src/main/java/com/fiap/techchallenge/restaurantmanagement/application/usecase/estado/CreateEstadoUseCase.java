@@ -12,6 +12,7 @@ public class CreateEstadoUseCase {
     private final EstadoGateway estadoGateway;
 
     public Estado saveEstado(Estado estado) {
+
         return estadoGateway.save(estado);
     }
 }
