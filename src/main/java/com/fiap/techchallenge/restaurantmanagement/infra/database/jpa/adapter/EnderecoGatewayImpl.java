@@ -49,7 +49,7 @@ public class EnderecoGatewayImpl implements EnderecoGateway {
     @Override
     public void deleteById(Long id) {
         if (!enderecoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Cidade com o id " + id + " não encontrado.");
+            throw new EntityNotFoundException("Enderço com o id " + id + " não encontrado.");
         }
         enderecoRepository.deleteById(id);
     }

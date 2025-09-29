@@ -13,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 public class EnderecoEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private String numero;
