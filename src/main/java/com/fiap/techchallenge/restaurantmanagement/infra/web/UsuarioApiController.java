@@ -27,7 +27,6 @@ public class UsuarioApiController implements IUsuarioApiController {
     private final ChangePasswordUseCase changePasswordUseCase;
     private final UsuarioWebMapper usuarioWebMapper;
 
-
     @Override
     public ResponseEntity<UsuarioResponse> create(UsuarioRequest usuarioRequest) {
         Usuario usuario = usuarioWebMapper.toDomain(usuarioRequest);

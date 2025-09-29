@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity;
 
+import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,10 +13,11 @@ import lombok.*;
 @NoArgsConstructor
 public class EnderecoEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private String numero;
-
+    private String complemento;
     private String cep;
     private String bairro;
 

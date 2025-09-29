@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-public interface ICidadeApiController<T> {
+public interface IEnderecoApiController<T> {
 
     @GetMapping
     ResponseEntity<List<T>> listAll();
@@ -25,4 +25,3 @@ public interface ICidadeApiController<T> {
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
 }
-
