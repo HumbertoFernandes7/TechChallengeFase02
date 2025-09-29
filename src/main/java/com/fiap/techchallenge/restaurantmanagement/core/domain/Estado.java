@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,5 +13,4 @@ public class Estado {
     private Long id;
     private String nome;
     private String sigla;
-    private List<Cidade> cidades;
 }

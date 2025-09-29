@@ -1,13 +1,15 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper;
 
-import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class EnderecoMapper {
-    private final CidadeMapper cidadeMapper = new CidadeMapper();
+
+    private final CidadeMapper cidadeMapper;
 
     public Endereco toDomain(EnderecoEntity enderecoEntity) {
         if (enderecoEntity == null) {
@@ -37,4 +39,5 @@ public class EnderecoMapper {
                 endereco.getBairro(),
                 cidadeMapper.toEntity(endereco.getCidade()));
     }
+
 }
