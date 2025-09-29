@@ -1,4 +1,4 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.web;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.restaurante.*;
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.FindUsuarioUseCase;

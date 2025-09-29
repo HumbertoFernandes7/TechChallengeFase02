@@ -1,4 +1,4 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.web;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.*;
 import jakarta.validation.Valid;

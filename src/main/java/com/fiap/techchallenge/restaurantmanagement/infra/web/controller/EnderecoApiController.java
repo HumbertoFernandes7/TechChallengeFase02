@@ -1,6 +1,5 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.web;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
-import com.fiap.techchallenge.restaurantmanagement.application.usecase.cidade.*;
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.endereco.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import lombok.RequiredArgsConstructor;

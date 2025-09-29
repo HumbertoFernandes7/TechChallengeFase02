@@ -1,7 +1,6 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.web;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.estado.*;
-import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.CreateUsuarioUseCase;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Estado;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

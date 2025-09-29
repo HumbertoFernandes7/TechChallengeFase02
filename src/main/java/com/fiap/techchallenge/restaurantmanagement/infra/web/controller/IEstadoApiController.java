@@ -1,4 +1,4 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.web;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-public interface IEnderecoApiController<T> {
+public interface IEstadoApiController<T> {
 
     @GetMapping
     ResponseEntity<List<T>> listAll();
@@ -19,8 +19,8 @@ public interface IEnderecoApiController<T> {
     @PostMapping
     ResponseEntity<Void> insert(@RequestBody @Valid T t);
 
-    @PutMapping
-    ResponseEntity<Void> update(@PathVariable Long id,@RequestBody @Valid T t);
+    @PutMapping("/{id}")
+    ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid T t);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
