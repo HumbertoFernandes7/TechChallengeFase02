@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web;
 
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioResponse;
 import org.springframework.http.ResponseEntity;
@@ -23,4 +24,7 @@ public interface IUsuarioApiController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
+
+    @PatchMapping("/{id}/change-password")
+    ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody NovaSenhaRequest request);
 }

@@ -2,6 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.web;
 
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioResponse;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.UsuarioWebMapper;
@@ -23,6 +24,7 @@ public class UsuarioApiController implements IUsuarioApiController {
     private final UpdateUsuarioUseCase updateUsuarioUseCase;
     private final DeleteUsuarioUseCase deleteUsuarioUseCase;
     private final ListUsuarioUseCase listUsuarioUseCase;
+    private final ChangePasswordUseCase changePasswordUseCase;
     private final UsuarioWebMapper usuarioWebMapper;
 
     @Override
@@ -54,6 +56,12 @@ public class UsuarioApiController implements IUsuarioApiController {
     @Override
     public ResponseEntity<Void> delete(Long id) {
         deleteUsuarioUseCase.execute(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> changePassword(Long id, NovaSenhaRequest novaSenha) {
+        Usuario senhaAtualizada = changePasswordUseCase.execute(id, novaSenha);
         return ResponseEntity.noContent().build();
     }
 }

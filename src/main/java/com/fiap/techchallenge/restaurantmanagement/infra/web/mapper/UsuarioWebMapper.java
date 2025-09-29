@@ -17,7 +17,13 @@ public class UsuarioWebMapper {
     private final ModelMapper modelMapper;
 
     public Usuario toDomain(UsuarioRequest usuarioRequest) {
-        return modelMapper.map(usuarioRequest, Usuario.class);
+        return new Usuario(
+                null,
+                usuarioRequest.getNome(),
+                usuarioRequest.getEmail(),
+                usuarioRequest.getTipo(),
+                usuarioRequest.getSenha()
+        );
     }
 
     public UsuarioResponse toResponse(Usuario usuario) {
