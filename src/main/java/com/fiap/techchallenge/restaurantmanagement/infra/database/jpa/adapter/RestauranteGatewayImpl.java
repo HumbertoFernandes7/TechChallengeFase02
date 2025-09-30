@@ -2,10 +2,11 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.RestauranteGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
-import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.RestauranteEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.RestauranteMapper;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.RestauranteRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,21 +21,25 @@ import java.util.stream.Collectors;
 public class RestauranteGatewayImpl implements RestauranteGateway {
 
     private final RestauranteMapper restauranteMapper;
+
     private final RestauranteRepository restauranteRepository;
     private final UsuarioRepository usuarioRepository;
+    private final EnderecoRepository enderecoRepository;
 
     @Override
     public Restaurante save(Restaurante restaurante) {
         UsuarioEntity usuarioEntity = usuarioRepository.findById(restaurante.getDonoRestaurante().getId()).orElseThrow(
                 () -> new EntityNotFoundException("Usuário não encontrado para associar ao restaurante")
         );
-        if(usuarioEntity.getTipo() != TipoUsuario.CLIENTE){
+
+        EnderecoEntity enderecoEntity = enderecoRepository.findById(restaurante.getEndereco().getId()).orElseThrow(
+                () -> new EntityNotFoundException("Endereço não encontrado para associar ao restaurante")
+        );
             RestauranteEntity restauranteEntity = restauranteMapper.toEntity(restaurante);
             restauranteEntity.setDonoRestaurante(usuarioEntity);
+            restauranteEntity.setEndereco(enderecoEntity);
             RestauranteEntity restauranteSalvo = restauranteRepository.save(restauranteEntity);
             return restauranteMapper.toDomain(restauranteSalvo);
-        }
-        throw new RuntimeException("Usuário associado não tem permissão para ser dono do restaurante");
     }
 
     @Override

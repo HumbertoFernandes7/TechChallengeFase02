@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -35,5 +33,9 @@ public class Restaurante {
         this.horarioAbertura = horarioAbertura;
         this.horarioFechamento = horarioFechamento;
         this.donoRestaurante = donoRestaurante;
+    }
+
+    public void associarEndereco(Endereco endereco){
+        this.endereco = endereco;
     }
 }

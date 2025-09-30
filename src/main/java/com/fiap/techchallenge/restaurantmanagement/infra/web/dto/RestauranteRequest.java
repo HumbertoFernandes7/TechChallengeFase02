@@ -23,6 +23,9 @@ public class RestauranteRequest {
     @NotNull(message = "O horário de fechamento é obrigatório.")
     private LocalTime horarioFechamento;
 
-    @NotNull(message = "Um usuario deve ser associado ao restaurante.")
+    @NotNull(message = "Um usuário deve ser associado ao restaurante.")
     private Long donoRestauranteId;
+
+    @NotNull(message = "Um endereço deve ser associado ao restaurante.")
+    private Long enderecoId;
 }
