@@ -1,10 +1,12 @@
 package com.fiap.techchallenge.restaurantmanagement.core.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
 
     private Long id;
@@ -27,12 +29,14 @@ public class Usuario {
         this.senha = validarSenha(senha);
     }
 
-    public void vinculaEndereco(Endereco endereco){
-        this.endereco = endereco;
+    public void updateUsuario(String nome, String email, TipoUsuario tipo){
+        this.nome = nome;
+        this.email = email;
+        this.tipo = tipo;
     }
 
-    public void changePassword(String senha){
-        this.senha = validarSenha(senha);
+    public void changePassword(String novaSenha){
+        this.senha = validarSenha(novaSenha);
     }
 
     private String validarSenha(String senha){

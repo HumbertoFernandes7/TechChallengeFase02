@@ -4,15 +4,21 @@ import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGa
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ChangePasswordUseCase {
 
     private final UsuarioGateway usuarioGateway;
 
-    public Usuario execute(Long id, NovaSenhaRequest novaSenha){
-        return usuarioGateway.changePassword(id, novaSenha);
+    public void execute(Long id, NovaSenhaRequest novaSenha){
+        if(!novaSenha.getNovaSenha().equals(novaSenha.getRepetirNovaSenha())){
+            throw new IllegalArgumentException("Nova senha e Repetir nova Senha não são iguais");
+        }
+        Usuario usuario = usuarioGateway.findById(id);
+        usuario.changePassword(novaSenha.getNovaSenha());
+        usuarioGateway.update(usuario);
     }
 }

@@ -2,16 +2,16 @@ package com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateUsuarioUseCase {
 
     private final UsuarioGateway usuarioGateway;
 
-    public Usuario execute(Usuario usuario){
-       return usuarioGateway.save(usuario);
+    public Usuario execute(Usuario usuario, Long enderecoId){
+        return usuarioGateway.save(usuario, enderecoId);
     }
 }

@@ -1,6 +1,5 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web.dto;
 
-import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +12,4 @@ public class UsuarioResponse {
     private String nome;
     private String email;
     private TipoUsuario tipo;
-    private Endereco endereco;
 }

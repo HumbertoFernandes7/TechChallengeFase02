@@ -2,7 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.web.dto;
 
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +19,8 @@ public class UsuarioRequest {
     @NotBlank(message = "tipo não pode ser nulo ou vazio")
     private TipoUsuario tipo;
 
-    @Size(min = 8, message = "senha deve ter no mínimo 8 caracteres")
-    @NotBlank(message = "senha não pode ser nulo ou vazio")
     private String senha;
+
+    @NotNull(message = "id do endereço não pode ser nulo")
+    private Long enderecoId;
 }

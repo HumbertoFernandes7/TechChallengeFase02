@@ -1,12 +1,13 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
+import com.fiap.techchallenge.restaurantmanagement.application.usecase.endereco.FindEnderecoUseCase;
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioResponse;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.UsuarioWebMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UsuarioApiController implements IUsuarioApiController {
 
     private final CreateUsuarioUseCase createUsuarioUseCase;
@@ -27,10 +28,12 @@ public class UsuarioApiController implements IUsuarioApiController {
     private final ChangePasswordUseCase changePasswordUseCase;
     private final UsuarioWebMapper usuarioWebMapper;
 
+    private final FindEnderecoUseCase findEnderecoUseCase;
+
     @Override
     public ResponseEntity<UsuarioResponse> create(UsuarioRequest usuarioRequest) {
         Usuario usuario = usuarioWebMapper.toDomain(usuarioRequest);
-        Usuario usuarioSalvo = createUsuarioUseCase.execute(usuario);
+        Usuario usuarioSalvo = createUsuarioUseCase.execute(usuario, usuarioRequest.getEnderecoId());
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioWebMapper.toResponse(usuarioSalvo));
     }
 
@@ -48,8 +51,8 @@ public class UsuarioApiController implements IUsuarioApiController {
 
     @Override
     public ResponseEntity<UsuarioResponse> update(Long id, UsuarioRequest usuarioRequest) {
-        Usuario usuarioParaAtualizar = usuarioWebMapper.toDomain(usuarioRequest);
-        Usuario usuarioAtualizado = updateUsuarioUseCase.execute(id, usuarioParaAtualizar);
+        Usuario usuarioEncontrado = findUsuarioUseCase.execute(id);
+        Usuario usuarioAtualizado = updateUsuarioUseCase.execute(usuarioRequest, usuarioEncontrado);
         return ResponseEntity.ok(usuarioWebMapper.toResponse(usuarioAtualizado));
     }
 
@@ -61,7 +64,7 @@ public class UsuarioApiController implements IUsuarioApiController {
 
     @Override
     public ResponseEntity<Void> changePassword(Long id, NovaSenhaRequest novaSenha) {
-        Usuario senhaAtualizada = changePasswordUseCase.execute(id, novaSenha);
+        changePasswordUseCase.execute(id, novaSenha);
         return ResponseEntity.noContent().build();
     }
 }
