@@ -10,10 +10,12 @@ public class RestauranteMapper {
 
     private final UsuarioMapper usuarioMapper;
     private final CardapioMapper cardapioMapper;
+    private final EnderecoMapper enderecoMapper;
 
-    public RestauranteMapper(UsuarioMapper usuarioMapper, @Lazy CardapioMapper cardapioMapper) {
+    public RestauranteMapper(UsuarioMapper usuarioMapper, @Lazy CardapioMapper cardapioMapper, EnderecoMapper enderecoMapper) {
         this.usuarioMapper = usuarioMapper;
         this.cardapioMapper = cardapioMapper;
+        this.enderecoMapper = enderecoMapper;
     }
 
     public RestauranteEntity toEntity(Restaurante restaurante) {
@@ -33,7 +35,7 @@ public class RestauranteMapper {
         return new Restaurante(
                 restauranteSalvo.getId(),
                 restauranteSalvo.getNome(),
-                null,
+                enderecoMapper.toDomain(restauranteSalvo.getEndereco()),
                 restauranteSalvo.getTipoCozinha(),
                 restauranteSalvo.getHorarioAbertura(),
                 restauranteSalvo.getHorarioFechamento(),
