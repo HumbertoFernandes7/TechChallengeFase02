@@ -21,11 +21,11 @@ public interface IUsuarioApiController {
     ResponseEntity<List<UsuarioResponse>> listAll();
 
     @PutMapping("/{id}")
-    ResponseEntity<UsuarioResponse> update(@PathVariable Long id, @RequestBody UsuarioRequest request);
+    ResponseEntity<UsuarioResponse> update(@PathVariable Long id, @RequestBody @Valid UsuarioRequest request);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
 
     @PatchMapping("/{id}/change-password")
-    ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody NovaSenhaRequest request);
+    ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody @Valid NovaSenhaRequest request);
 }
