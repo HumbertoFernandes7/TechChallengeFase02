@@ -24,7 +24,6 @@ public class EstadoApiController implements IEstadoApiController<Estado> {
 
     @Override
     public ResponseEntity<List<Estado>> listAll() {
-
         return ResponseEntity.ok().body(listEstadoUseCase.execute());
     }
 

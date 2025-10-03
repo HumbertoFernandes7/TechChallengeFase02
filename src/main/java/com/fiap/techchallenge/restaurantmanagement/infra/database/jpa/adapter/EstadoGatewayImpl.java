@@ -30,10 +30,8 @@ public class EstadoGatewayImpl implements EstadoGateway {
     public Estado update(Long id, Estado estadoAtualizado) {
         EstadoEntity estadoEntity = estadoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Estado com o id " + id + " não encontrado."));
-
         estadoEntity.setNome(estadoAtualizado.getNome());
         estadoEntity.setSigla(estadoAtualizado.getSigla());
-
         EstadoEntity estadoSalvo = estadoRepository.save(estadoEntity);
         return estadoMapper.toDomain(estadoSalvo);
     }
