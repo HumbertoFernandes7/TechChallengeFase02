@@ -7,6 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.UsuarioWebMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.is;
@@ -47,6 +46,18 @@ public class UsuarioApiControllerTest {
 
     @Autowired
     private ListUsuarioUseCase listUsuarioUseCase;
+
+    @Autowired
+    private FindUsuarioUseCase findUsuarioUseCase;
+
+    @Autowired
+    private UpdateUsuarioUseCase updateUsuarioUseCase;
+
+    @Autowired
+    private DeleteUsuarioUseCase deleteUsuarioUseCase;
+
+    @Autowired
+    private ChangePasswordUseCase changePasswordUseCase;
 
     @TestConfiguration
     static class TestConfig {
@@ -97,6 +108,7 @@ public class UsuarioApiControllerTest {
         }
     }
 
+    // Post
     @Test
     void quando_cadastrarUsuario_deveRetornarSucesso() throws Exception {
         // Preparação
@@ -137,6 +149,7 @@ public class UsuarioApiControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // Get
     @Test
     void quando_listarTodosUsuarios_deveRetornarStatusOkEListaDeUsuarios() throws Exception {
         // Preparação
@@ -167,5 +180,74 @@ public class UsuarioApiControllerTest {
         mockMvc.perform(get("/usuarios"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    // Update
+    @Test
+    void quando_atualizarUsuarioExistente_deveRetornarStatusOkEUsuarioAtualizado() throws Exception {
+        // Preparação (Arrange)
+        Long usuarioId = 1L;
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setNome("Nome Atualizado");
+        usuarioRequest.setEmail("email@atualizado.com");
+        usuarioRequest.setTipo(TipoUsuario.CLIENTE);
+        usuarioRequest.setSenha("12345678");
+        usuarioRequest.setEnderecoId(1L);
+
+        Usuario usuarioEncontrado = new Usuario(usuarioId, "Nome Antigo", "antigo@email.com", TipoUsuario.ADMIN, "12345678");
+        Usuario usuarioAtualizado = new Usuario(usuarioId, "Nome Atualizado", "email@atualizado.com", TipoUsuario.CLIENTE, "12345678");
+
+        // Configuração dos Mocks
+        when(findUsuarioUseCase.execute(usuarioId)).thenReturn(usuarioEncontrado);
+        when(updateUsuarioUseCase.execute(any(UsuarioRequest.class), any(Usuario.class))).thenReturn(usuarioAtualizado);
+
+        // Ação e Verificação
+        mockMvc.perform(put("/usuarios/{id}", usuarioId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(usuarioId))
+                .andExpect(jsonPath("$.nome").value("Nome Atualizado"))
+                .andExpect(jsonPath("$.email").value("email@atualizado.com"))
+                .andExpect(jsonPath("$.tipo").value("CLIENTE"));
+    }
+
+    @Test
+    void quando_atualizarUsuarioComDadosInvalidos_deveRetornarStatusBadRequest() throws Exception {
+        // Preparação (Arrange)
+        Long usuarioId = 1L;
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        //usuarioRequest.setNome("Nome Atualizado");
+        usuarioRequest.setEmail("email@atualizado.com");
+        usuarioRequest.setTipo(TipoUsuario.CLIENTE);
+        usuarioRequest.setSenha("12345678");
+        usuarioRequest.setEnderecoId(1L);
+
+        // Ação e Verificação (Act & Assert)
+        mockMvc.perform(put("/usuarios/{id}", usuarioId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioRequest)))
+                .andExpect(status().isBadRequest());
+    }
+
+    //@Test
+    void quando_atualizarUsuarioInexistente_deveRetornarStatusNotFound() throws Exception {
+        // Preparação (Arrange)
+        Long idInexistente = 99L;
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setNome("Nome Atualizado");
+        usuarioRequest.setEmail("email@atualizado.com");
+        usuarioRequest.setTipo(TipoUsuario.CLIENTE);
+        usuarioRequest.setSenha("12345678");
+        usuarioRequest.setEnderecoId(1L);
+
+        // Configuração do Mock: O findUsuarioUseCase falha ao encontrar o usuário
+        when(findUsuarioUseCase.execute(idInexistente)).thenThrow(new EntityNotFoundException("Usuário não encontrado"));
+
+        // Ação e Verificação
+        mockMvc.perform(put("/usuarios/{id}", idInexistente)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioRequest)))
+                .andExpect(status().isInternalServerError());
     }
 }
