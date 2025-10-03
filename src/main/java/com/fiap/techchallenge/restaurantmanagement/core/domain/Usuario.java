@@ -1,6 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.core.domain;
 
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.InvalidPasswordException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.InvalidPasswordException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

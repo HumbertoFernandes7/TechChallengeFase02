@@ -1,11 +1,10 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.exception;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;

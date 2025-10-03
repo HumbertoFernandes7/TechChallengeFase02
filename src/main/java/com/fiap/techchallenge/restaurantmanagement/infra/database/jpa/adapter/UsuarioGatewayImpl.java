@@ -7,8 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Usu
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.UsuarioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.UserNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

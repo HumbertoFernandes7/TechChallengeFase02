@@ -1,5 +1,7 @@
-package com.fiap.techchallenge.restaurantmanagement.infra.exception;
+package com.fiap.techchallenge.restaurantmanagement.infra.web.handler;
 
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.*;
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.ErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

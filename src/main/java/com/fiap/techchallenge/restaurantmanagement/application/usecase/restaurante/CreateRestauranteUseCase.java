@@ -4,7 +4,7 @@ import com.fiap.techchallenge.restaurantmanagement.application.gateway.Restauran
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.BusinessRuleException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.BusinessRuleException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

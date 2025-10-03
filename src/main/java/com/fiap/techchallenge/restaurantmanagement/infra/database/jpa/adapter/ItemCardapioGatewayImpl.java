@@ -7,8 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Ite
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.ItemCardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.ItemCardapioRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.ItemCardapioNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.ItemCardapioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -3,11 +3,9 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.EnderecoGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EstadoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EnderecoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.EnderecoNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

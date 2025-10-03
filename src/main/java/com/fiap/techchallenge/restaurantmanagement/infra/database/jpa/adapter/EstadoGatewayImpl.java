@@ -5,8 +5,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Estado;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EstadoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EstadoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.EstadoNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EstadoNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

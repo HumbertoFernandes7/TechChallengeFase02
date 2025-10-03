@@ -5,8 +5,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CidadeEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CidadeMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
-import com.fiap.techchallenge.restaurantmanagement.infra.exception.CidadeNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.CidadeNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
