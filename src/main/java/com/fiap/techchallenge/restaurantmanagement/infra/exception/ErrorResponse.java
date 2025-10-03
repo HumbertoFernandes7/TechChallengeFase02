@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
 
