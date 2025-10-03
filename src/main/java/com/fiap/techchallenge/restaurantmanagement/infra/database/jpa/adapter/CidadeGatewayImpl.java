@@ -5,6 +5,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CidadeEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CidadeMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
+import com.fiap.techchallenge.restaurantmanagement.infra.exception.CidadeNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
     @Override
     public Cidade findById(Long id) {
         return cidadeRepository.findById(id).map(cidadeMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Cidade não encontrado"));
+                () -> new CidadeNotFoundException("Cidade com o id " + id + " não encontrada."));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
     @Override
     public void deleteById(Long id) {
         if (!cidadeRepository.existsById(id)) {
-            throw new EntityNotFoundException("Cidade com o id " + id + " não encontrado.");
+            throw new CidadeNotFoundException("Cidade com o id " + id + " não encontrada.");
         }
         cidadeRepository.deleteById(id);
     }

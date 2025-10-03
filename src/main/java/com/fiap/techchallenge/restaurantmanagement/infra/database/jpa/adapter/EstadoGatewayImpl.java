@@ -5,6 +5,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Estado;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EstadoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EstadoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
+import com.fiap.techchallenge.restaurantmanagement.infra.exception.EstadoNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class EstadoGatewayImpl implements EstadoGateway {
     @Override
     public Estado update(Long id, Estado estadoAtualizado) {
         EstadoEntity estadoEntity = estadoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Estado com o id " + id + " não encontrado."));
+                .orElseThrow(() -> new EstadoNotFoundException("Estado com o id " + id + " não encontrado."));
 
         estadoEntity.setNome(estadoAtualizado.getNome());
         estadoEntity.setSigla(estadoAtualizado.getSigla());
@@ -41,7 +42,7 @@ public class EstadoGatewayImpl implements EstadoGateway {
     @Override
     public Estado findById(Long id) {
         return estadoRepository.findById(id).map(estadoMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Estado não encontrado"));
+                () -> new EstadoNotFoundException("Estado com o id " + id + " não encontrado."));
     }
 
     @Override
@@ -55,7 +56,7 @@ public class EstadoGatewayImpl implements EstadoGateway {
     @Override
     public void deleteById(Long id) {
         if (!estadoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Estado com o id " + id + " não encontrado.");
+            throw new EstadoNotFoundException("Estado com o id " + id + " não encontrado.");
         }
         estadoRepository.deleteById(id);
     }

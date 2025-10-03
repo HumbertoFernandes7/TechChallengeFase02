@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.core.domain;
 
+import com.fiap.techchallenge.restaurantmanagement.infra.exception.InvalidPasswordException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +42,7 @@ public class Usuario {
 
     private String validarSenha(String senha){
         if(senha == null || senha.length() < 8){
-            throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres");
+            throw new InvalidPasswordException("A senha deve ter 8 ou mais caracteres");
         } else {
             return senha;
         }
