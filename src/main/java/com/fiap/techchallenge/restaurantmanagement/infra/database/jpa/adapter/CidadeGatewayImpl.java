@@ -5,7 +5,8 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CidadeEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CidadeMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
-import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.CidadeNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
 
     private final CidadeRepository cidadeRepository;
     private final CidadeMapper cidadeMapper;
+    private final EstadoRepository estadoRepository;
 
     @Override
     public Cidade save(Cidade cidade) {
@@ -27,28 +29,33 @@ public class CidadeGatewayImpl implements CidadeGateway {
     }
 
     @Override
-    //TODO
     public Cidade update(Long id, Cidade cidadeAtualizada) {
-        return null;
+        CidadeEntity cidadeEntity = cidadeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cidade com o id " + id + " não encontrado."));
+        cidadeEntity.setNome(cidadeAtualizada.getNome());
+        //esse ponto aqui pode causar falha
+        cidadeEntity.setEstado(estadoRepository.findById(cidadeAtualizada.getEstado().getId()).get());
+        CidadeEntity save = cidadeRepository.save(cidadeEntity);
+        return cidadeMapper.toDomain(save);
     }
 
     @Override
     public Cidade findById(Long id) {
         return cidadeRepository.findById(id).map(cidadeMapper::toDomain).orElseThrow(
-                () -> new CidadeNotFoundException("Cidade com o id " + id + " não encontrada."));
+                () -> new EntityNotFoundException("Cidade não encontrado"));
     }
 
     @Override
     public List<Cidade> findAll() {
-        return  cidadeRepository.findAll()
+        return cidadeRepository.findAll()
                 .stream()
                 .map(cidadeMapper::toDomain)
-                .collect(Collectors.toList());    }
+                .collect(Collectors.toList());
+    }
 
     @Override
     public void deleteById(Long id) {
         if (!cidadeRepository.existsById(id)) {
-            throw new CidadeNotFoundException("Cidade com o id " + id + " não encontrada.");
+            throw new EntityNotFoundException("Cidade com o id " + id + " não encontrado.");
         }
         cidadeRepository.deleteById(id);
     }

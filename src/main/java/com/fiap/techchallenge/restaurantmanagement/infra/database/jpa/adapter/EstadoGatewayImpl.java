@@ -33,7 +33,6 @@ public class EstadoGatewayImpl implements EstadoGateway {
 
         estadoEntity.setNome(estadoAtualizado.getNome());
         estadoEntity.setSigla(estadoAtualizado.getSigla());
-
         EstadoEntity estadoSalvo = estadoRepository.save(estadoEntity);
         return estadoMapper.toDomain(estadoSalvo);
     }
