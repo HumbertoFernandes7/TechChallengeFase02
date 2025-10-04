@@ -1,10 +1,14 @@
 package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.endereco.FindEnderecoUseCase;
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.InvalidPasswordException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.UserNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.UsuarioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.UsuarioWebMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,8 +28,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -242,12 +245,89 @@ public class UsuarioApiControllerTest {
         usuarioRequest.setEnderecoId(1L);
 
         // Configuração do Mock: O findUsuarioUseCase falha ao encontrar o usuário
-        when(findUsuarioUseCase.execute(idInexistente)).thenThrow(new EntityNotFoundException("Usuário não encontrado"));
+        when(findUsuarioUseCase.execute(idInexistente)).thenThrow(new UserNotFoundException("Usuário não encontrado"));
 
         // Ação e Verificação
         mockMvc.perform(put("/usuarios/{id}", idInexistente)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(usuarioRequest)))
                 .andExpect(status().isInternalServerError());
+    }
+
+    // Delete
+    @Test
+    void quando_deletarUsuarioExistente_deveRetornarStatusNoContent() throws Exception {
+        // Preparação
+        Long usuarioId = 1L;
+
+        doNothing().when(deleteUsuarioUseCase).execute(usuarioId);
+
+        // Ação e Verificação
+        mockMvc.perform(delete("/usuarios/{id}", usuarioId))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void quando_deletarUsuarioInexistente_deveRetornarStatusNotFound() throws Exception {
+        // Preparação
+        Long idInexistente = 99L;
+
+        doThrow(new UserNotFoundException("Usuário não encontrado")).when(deleteUsuarioUseCase).execute(idInexistente);
+
+        // Ação e Verificação
+        mockMvc.perform(delete("/usuarios/{id}", idInexistente))
+                .andExpect(status().isNotFound());
+    }
+
+    // Patch
+    @Test
+    void quando_alterarSenha_deveRetornarStatusNoContent() throws Exception {
+        // Preparação
+        Long usuarioId = 1L;
+        NovaSenhaRequest novaSenhaRequest = new NovaSenhaRequest();
+        novaSenhaRequest.setNovaSenha("12345678");
+        novaSenhaRequest.setRepetirNovaSenha("12345678");
+
+        doNothing().when(changePasswordUseCase).execute(usuarioId, novaSenhaRequest);
+
+        // Ação e Verificação
+        mockMvc.perform(patch("/usuarios/{id}/change-password", usuarioId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(novaSenhaRequest)))
+                .andExpect(status().isNoContent());
+
+    }
+
+    @Test
+    void quando_alterarSenhaComSenhasDiferentes_deveRetornarStatusBadRequest() throws Exception {
+        // Preparação
+        Long usuarioId = 1L;
+        NovaSenhaRequest novaSenhaRequest = new NovaSenhaRequest();
+        novaSenhaRequest.setNovaSenha("senha_diferente_1");
+        novaSenhaRequest.setRepetirNovaSenha("senha_diferente_2");
+
+        doThrow(new InvalidPasswordException("Nova senha e Repetir nova Senha não são iguais."))
+                .when(changePasswordUseCase).execute(eq(usuarioId), any(NovaSenhaRequest.class));
+
+        // Ação e Verificação
+        mockMvc.perform(patch("/usuarios/{id}/change-password", usuarioId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(novaSenhaRequest)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void quando_alterarSenhaComCampoInvalido_deveRetornarStatusBadRequest() throws Exception {
+        // Preparação
+        Long usuarioId = 1L;
+        NovaSenhaRequest novaSenhaRequest = new NovaSenhaRequest();
+        novaSenhaRequest.setNovaSenha("curta"); // Inválido pela anotação @Size no DTO
+        novaSenhaRequest.setRepetirNovaSenha("curta");
+
+        // Ação e Verificação
+        mockMvc.perform(patch("/usuarios/{id}/change-password", usuarioId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(novaSenhaRequest)))
+                .andExpect(status().isBadRequest()); // A validação do DTO deve falhar
     }
 }
