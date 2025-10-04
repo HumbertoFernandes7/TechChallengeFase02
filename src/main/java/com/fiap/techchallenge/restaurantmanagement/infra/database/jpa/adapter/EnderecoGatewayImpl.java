@@ -3,10 +3,9 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.EnderecoGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EstadoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EnderecoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +34,7 @@ public class EnderecoGatewayImpl implements EnderecoGateway {
     @Override
     public Endereco findById(Long id) {
         return enderecoRepository.findById(id).map(enderecoMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Endereço não encontrado"));
+                () -> new EnderecoNotFoundException("Endereço com o id " + id + " não encontrado."));
     }
 
     @Override
@@ -49,7 +48,7 @@ public class EnderecoGatewayImpl implements EnderecoGateway {
     @Override
     public void deleteById(Long id) {
         if (!enderecoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Enderço com o id " + id + " não encontrado.");
+            throw new EnderecoNotFoundException("Endereço com o id " + id + " não encontrado.");
         }
         enderecoRepository.deleteById(id);
     }

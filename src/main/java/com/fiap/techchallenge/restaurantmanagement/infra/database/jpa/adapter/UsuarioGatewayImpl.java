@@ -7,7 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Usu
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.UsuarioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public Usuario save(Usuario usuario, Long enderecoId) {
         EnderecoEntity enderecoEntity = enderecoRepository.findById(enderecoId)
-                .orElseThrow(() -> new EntityNotFoundException("Endereço com o id " + enderecoId + " não encontrado."));
+                .orElseThrow(() -> new UserNotFoundException("Usuario com id" + enderecoId +" não encontrado "));
 
         UsuarioEntity usuarioEntity = usuarioMapper.toEntity(usuario);
         usuarioEntity.setEndereco(enderecoEntity);
@@ -49,7 +49,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).map(usuarioMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Usuário não encontrado"));
+                () -> new UserNotFoundException("Usuario com id" + id +" não encontrado "));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public void deleteById(Long id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new EntityNotFoundException("Usuário com o id " + id + " não encontrado.");
+            throw new UserNotFoundException("Usuario com id" + id +" não encontrado ");
         }
         usuarioRepository.deleteById(id);
     }
