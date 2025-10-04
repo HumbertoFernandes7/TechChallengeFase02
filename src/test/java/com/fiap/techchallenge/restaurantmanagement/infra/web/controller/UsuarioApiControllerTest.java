@@ -288,7 +288,7 @@ public class UsuarioApiControllerTest {
         novaSenhaRequest.setNovaSenha("12345678");
         novaSenhaRequest.setRepetirNovaSenha("12345678");
 
-        doNothing().when(changePasswordUseCase).execute(usuarioId, novaSenhaRequest);
+        doNothing().when(changePasswordUseCase).execute(eq(usuarioId), any(NovaSenhaRequest.class));
 
         // Ação e Verificação
         mockMvc.perform(patch("/usuarios/{id}/change-password", usuarioId)
