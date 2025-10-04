@@ -4,6 +4,7 @@ import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGa
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.usuario.ChangePasswordUseCase;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.InvalidPasswordException;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.NovaSenhaRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,12 +59,12 @@ public class ChangePasswordUseCaseTest {
         novaSenha.setRepetirNovaSenha("repetirNovaSenha_12345678");
 
         // Ação
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        InvalidPasswordException exception = assertThrows(InvalidPasswordException.class, () -> {
             changePasswordUseCase.execute(usuarioId, novaSenha);
         });
 
         // Verificação
-        assertEquals("Nova senha e Repetir nova Senha não são iguais", exception.getMessage());
+        assertEquals("Nova senha e Repetir nova Senha não são iguais.", exception.getMessage());
 
         // Garante que, se as senhas não batem, NENHUMA interação com o gateway acontece
         verifyNoInteractions(usuarioGateway);

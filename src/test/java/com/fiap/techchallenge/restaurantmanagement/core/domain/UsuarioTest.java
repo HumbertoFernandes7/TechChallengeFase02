@@ -1,5 +1,6 @@
 package com.fiap.techchallenge.restaurantmanagement.core.domain;
 
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.InvalidPasswordException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,11 +16,11 @@ public class UsuarioTest {
 
     @Test
     void quando_criarUsuarioComSenhaInvalida_deveLancarExcecao() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        InvalidPasswordException exception = assertThrows(InvalidPasswordException.class, () -> {
             new Usuario(1L, "Humberto Fernandes", "humberto@email.com", TipoUsuario.ADMIN, "senha");
         });
 
-        assertEquals("A senha deve ter no mínimo 8 caracteres", exception.getMessage());
+        assertEquals("A senha deve ter 8 ou mais caracteres", exception.getMessage());
     }
 
     @Test
@@ -37,16 +38,16 @@ public class UsuarioTest {
     }
 
     @Test
-    void quando_chamarChangePasswordComSenhaCurta_deveLancarIllegalArgumentException() {
+    void quando_chamarChangePasswordComSenhaCurta_deveLancarExcecao() {
         // Preparação
         Usuario usuario = new Usuario(1L, "Humberto Fernandes", "humberto@email.com", TipoUsuario.ADMIN, "12345678");
 
         // Ação
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        InvalidPasswordException exception = assertThrows(InvalidPasswordException.class, () -> {
             usuario.changePassword("123");
         });
 
         // Verificação
-        assertEquals("A senha deve ter no mínimo 8 caracteres", exception.getMessage());
+        assertEquals("A senha deve ter 8 ou mais caracteres", exception.getMessage());
     }
 }
