@@ -16,9 +16,10 @@ public class UsuarioRequest {
     @NotBlank(message = "email não pode ser nulo ou vazio")
     private String email;
 
-    @NotBlank(message = "tipo não pode ser nulo ou vazio")
+    @NotNull(message = "tipo não pode ser nulo ou vazio")
     private TipoUsuario tipo;
 
+    @NotBlank(message = "senha não pode ser nulo ou vazio")
     private String senha;
 
     @NotNull(message = "id do endereço não pode ser nulo")

@@ -4,6 +4,7 @@ import com.fiap.techchallenge.restaurantmanagement.application.gateway.Restauran
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.TipoUsuario;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.BusinessRuleException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class CreateRestauranteUseCase {
             restaurante.associarEndereco(endereco);
             return restauranteGateway.save(restaurante);
         }else{
-            throw new RuntimeException("Usuário associado não tem permissão para ser dono do restaurante");
+            throw new BusinessRuleException("Usuario do tipo CLIENTE não pode ser dono de um restaurante");
         }
     }
 }

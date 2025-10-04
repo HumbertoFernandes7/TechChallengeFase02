@@ -5,7 +5,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Cardapio;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CardapioEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CardapioRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.CardapioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class CardapioGatewayImpl implements CardapioGateway {
     public Cardapio findById(Long id) {
         return cardapioRepository.findById(id)
                 .map(cardapioMapper::toDomain)
-                .orElseThrow(() -> new EntityNotFoundException("Cardápio não encontrado"));
+                .orElseThrow(() -> new CardapioNotFoundException("Cardápio com o id " + id + " não encontrado."));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CardapioGatewayImpl implements CardapioGateway {
     @Override
     public void deleteById(Long id) {
         if(!cardapioRepository.existsById(id)){
-           throw new EntityNotFoundException("Cardápio não encontrado");
+           throw new CardapioNotFoundException("Cardápio com o id " + id + " não encontrado.");
         }
         cardapioRepository.deleteById(id);
     }

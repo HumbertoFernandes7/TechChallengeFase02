@@ -7,7 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Ite
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.ItemCardapioMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.ItemCardapioRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.ItemCardapioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +35,7 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
     @Override
     public ItemCardapio update(Long id, ItemCardapio itemCardapioAtualizado) {
         ItemCardapioEntity itemCardapioEntity = itemCardapioRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(" item com id" + id + " não encontrado"));
+                .orElseThrow(()-> new ItemCardapioNotFoundException("Item de cardápio com o id " + id + " não encontrado."));
 
         itemCardapioEntity.setNome(itemCardapioAtualizado.getNome());
         itemCardapioEntity.setDescricao(itemCardapioAtualizado.getDescricao());
@@ -50,7 +50,7 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
     @Override
     public ItemCardapio findById(Long id) {
         return itemCardapioRepository.findById(id).map(itemCardapioMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException(" item com id" + id + " não encontrado"));
+                () -> new ItemCardapioNotFoundException("Item de cardápio com o id " + id + " não encontrado."));
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
     @Override
     public void deleteById(Long id) {
         if (!itemCardapioRepository.existsById(id)) {
-            throw new EntityNotFoundException(" item com id" + id + " não encontrado");
+            throw new ItemCardapioNotFoundException("Item de cardápio com o id " + id + " não encontrado.");
         }
         itemCardapioRepository.deleteById(id);
     }

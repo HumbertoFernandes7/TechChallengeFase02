@@ -9,6 +9,8 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.Res
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.RestauranteRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.RestaurantNotFoundException;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,7 +31,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
     @Override
     public Restaurante save(Restaurante restaurante) {
         UsuarioEntity usuarioEntity = usuarioRepository.findById(restaurante.getDonoRestaurante().getId()).orElseThrow(
-                () -> new EntityNotFoundException("Usuário não encontrado para associar ao restaurante")
+                () -> new UserNotFoundException("Usuário não encontrado para associar ao restaurante")
         );
 
         EnderecoEntity enderecoEntity = enderecoRepository.findById(restaurante.getEndereco().getId()).orElseThrow(
@@ -45,7 +47,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
     @Override
     public Restaurante update(Long id, Restaurante restauranteAtualizado) {
         RestauranteEntity restauranteEntity = restauranteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Restaurante com o id " + id + " não encontrado."));
+                .orElseThrow(() -> new RestaurantNotFoundException("Restaurante com o id " + id + " não encontrado."));
 
         restauranteEntity.setNome(restauranteAtualizado.getNome());
         restauranteEntity.setTipoCozinha(restauranteAtualizado.getTipoCozinha());
@@ -59,7 +61,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
     @Override
     public Restaurante findById(Long id) {
         return restauranteRepository.findById(id).map(restauranteMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Restaurante não encontrado"));
+                () -> new RestaurantNotFoundException("Restaurante não encontrado"));
     }
 
     @Override
@@ -73,7 +75,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
     @Override
     public void deleteById(Long id) {
         if (!restauranteRepository.existsById(id)) {
-            throw new EntityNotFoundException("Restaurante com o id " + id + " não encontrado.");
+            throw new RestaurantNotFoundException("Restaurante com o id " + id + " não encontrado.");
         }
         restauranteRepository.deleteById(id);
     }
