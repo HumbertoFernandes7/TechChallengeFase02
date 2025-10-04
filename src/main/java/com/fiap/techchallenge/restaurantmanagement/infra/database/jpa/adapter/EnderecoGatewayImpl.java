@@ -3,8 +3,8 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.EnderecoGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
-import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EstadoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EnderecoMapper;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class EnderecoGatewayImpl implements EnderecoGateway {
     private final EnderecoRepository enderecoRepository;
     private final EnderecoMapper enderecoMapper;
+    private final CidadeRepository cidadeRepository;
 
     @Override
     public Endereco save(Endereco endereco) {
@@ -26,10 +27,18 @@ public class EnderecoGatewayImpl implements EnderecoGateway {
         return enderecoMapper.toDomain(enderecoSalvo);
     }
 
-    //todo
     @Override
     public Endereco update(Long id, Endereco enderecoAtualizado) {
-        return null;
+        EnderecoEntity enderecoEntity = enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Endereço com o id " + id + " não encontrado."));
+        enderecoEntity.setLogradouro(enderecoAtualizado.getLogradouro());
+        enderecoEntity.setNumero(enderecoAtualizado.getNumero());
+        enderecoEntity.setComplemento(enderecoAtualizado.getComplemento());
+        enderecoEntity.setCep(enderecoAtualizado.getCep());
+        enderecoEntity.setBairro(enderecoAtualizado.getBairro());
+        enderecoEntity.setCidade(cidadeRepository.findById(enderecoAtualizado.getCidade().getId()).get());
+        EnderecoEntity save = enderecoRepository.save(enderecoEntity);
+        return enderecoMapper.toDomain(save);
+
     }
 
     @Override
