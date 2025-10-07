@@ -54,5 +54,4 @@ public class CreateRestauranteUseCaseTest {
         assertEquals(mensagemErro, exception.getMessage());
 
     }
-
 }

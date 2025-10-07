@@ -8,27 +8,23 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter.Re
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.*;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.*;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.*;
-import com.fiap.techchallenge.restaurantmanagement.infra.web.controller.UsuarioApiController;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-@DataJpaTest
+@SpringBootTest
+@Transactional
 @ActiveProfiles("test")
 public class RestauranteGatewayImplTest {
 
@@ -61,52 +57,6 @@ public class RestauranteGatewayImplTest {
     private Endereco enderecoSalvo;
     private Endereco endereco2Salvo;
 
-    @TestConfiguration
-    static class RestauranteGatewayImplTestConfig {
-
-        @Bean
-        public RestauranteGatewayImpl restauranteGateway(RestauranteMapper restauranteMapper,
-                                                         RestauranteRepository restauranteRepository,
-                                                         UsuarioRepository usuarioRepository,
-                                                         EnderecoRepository enderecoRepository) {
-            return new RestauranteGatewayImpl(restauranteMapper, restauranteRepository, usuarioRepository, enderecoRepository);
-        }
-
-        @Bean
-        public RestauranteMapper restauranteMapper(UsuarioMapper usuarioMapper, @Lazy CardapioMapper cardapioMapper, EnderecoMapper enderecoMapper) {
-            return new RestauranteMapper(usuarioMapper, cardapioMapper, enderecoMapper);
-        }
-
-        @Bean
-        public UsuarioMapper usuarioMapper() {
-            return new UsuarioMapper();
-        }
-
-        @Bean
-        public CardapioMapper cardapioMapper(RestauranteMapper restauranteMapper, ItemCardapioMapper itemCardapioMapper) {
-            return new CardapioMapper(restauranteMapper, itemCardapioMapper);
-        }
-
-        @Bean
-        public ItemCardapioMapper itemCardapioMapper() {
-            return new ItemCardapioMapper();
-        }
-
-        @Bean
-        public EnderecoMapper enderecoMapper(CidadeMapper cidadeMapper) {
-            return new EnderecoMapper(cidadeMapper);
-        }
-
-        @Bean
-        public CidadeMapper cidadeMapper(EstadoMapper estadoMapper) {
-            return new CidadeMapper(estadoMapper);
-        }
-
-        @Bean
-        public EstadoMapper estadoMapper() {
-            return new EstadoMapper();
-        }
-    }
 
     @BeforeEach
     void setUp() {
@@ -137,13 +87,13 @@ public class RestauranteGatewayImplTest {
         endereco2.setCidade(cidadeSalva);
         endereco2Salvo = enderecoMapper.toDomain(enderecoRepository.save(endereco2));
 
-       UsuarioEntity usuario = new UsuarioEntity();
-       usuario.setNome("Humberto");
-       usuario.setEmail("humberto@email.com");
-       usuario.setSenha("12345678");
-       usuario.setEndereco(new EnderecoEntity());
-       usuario.setTipo(TipoUsuario.ADMIN);
-       usuarioSalvo = usuarioMapper.toDomain(usuarioRepository.save(usuario));
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setNome("Humberto");
+        usuario.setEmail("humberto@email.com");
+        usuario.setSenha("12345678");
+        usuario.setEndereco(new EnderecoEntity());
+        usuario.setTipo(TipoUsuario.ADMIN);
+        usuarioSalvo = usuarioMapper.toDomain(usuarioRepository.save(usuario));
 
         UsuarioEntity usuario2 = new UsuarioEntity();
         usuario2.setNome("Humberto2");
@@ -325,3 +275,4 @@ public class RestauranteGatewayImplTest {
         assertEquals("Restaurante com o id 99 não encontrado.", exception.getMessage());
     }
 }
+

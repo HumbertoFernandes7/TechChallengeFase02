@@ -12,15 +12,13 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.Busines
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.RestaurantNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.RestauranteRequest;
-import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.RestauranteWebMapper;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalTime;
@@ -37,7 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.is;
 
-@WebMvcTest(RestauranteApiController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class RestauranteApiControllerTest {
 
@@ -47,53 +46,28 @@ public class RestauranteApiControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @MockitoBean
     private FindUsuarioUseCase findUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private FindEnderecoUseCase findEnderecoUseCase;
 
-    @Autowired
+    @MockitoBean
     private CreateRestauranteUseCase createRestauranteUseCase;
 
-    @Autowired
+    @MockitoBean
     private FindRestauranteUseCase findRestauranteUseCase;
 
-    @Autowired
+    @MockitoBean
     private ListRestauranteUseCase listRestauranteUseCase;
 
-    @Autowired
+    @MockitoBean
     private UpdateRestauranteUseCase updateRestauranteUseCase;
 
-    @Autowired
+    @MockitoBean
     private DeleteRestauranteUseCase deleteRestauranteUseCase;
 
-    @TestConfiguration
-    static class TestConfig {
-        // Mock de todas as dependências do RestauranteApiController
-        @Bean
-        public CreateRestauranteUseCase createRestauranteUseCase() { return mock(CreateRestauranteUseCase.class); }
-        @Bean
-        public FindRestauranteUseCase findRestauranteUseCase() { return mock(FindRestauranteUseCase.class); }
-        @Bean
-        public UpdateRestauranteUseCase updateRestauranteUseCase() { return mock(UpdateRestauranteUseCase.class); }
-        @Bean
-        public DeleteRestauranteUseCase deleteRestauranteUseCase() { return mock(DeleteRestauranteUseCase.class); }
-        @Bean
-        public ListRestauranteUseCase listRestauranteUseCase() { return mock(ListRestauranteUseCase.class); }
-        @Bean
-        public FindUsuarioUseCase findUsuarioUseCase() { return mock(FindUsuarioUseCase.class); }
-        @Bean
-        public FindEnderecoUseCase findEnderecoUseCase() { return mock(FindEnderecoUseCase.class); }
-
-        // Mappers necessários (instâncias reais)
-        @Bean
-        public RestauranteWebMapper restauranteWebMapper() { return new RestauranteWebMapper(modelMapper()); }
-        @Bean
-        public ModelMapper modelMapper() { return new ModelMapper(); }
-    }
-
-    //Post
+    // Post
     @Test
     void quando_criarRestauranteComDadosValidos_deveRetornarStatusCreated() throws Exception {
         // Preparação
@@ -190,7 +164,7 @@ public class RestauranteApiControllerTest {
 
     }
 
-    //Get
+    // Get
     @Test
     void quando_buscarRestaurantePorIdExistente_deveRetornarStatusOk() throws Exception{
         // Preparação
@@ -247,6 +221,7 @@ public class RestauranteApiControllerTest {
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
+    // Put
     @Test
     void quando_atualizarRestauranteExistente_deveRetornarStatusOk() throws Exception{
         // Preparação
@@ -274,6 +249,30 @@ public class RestauranteApiControllerTest {
     }
 
     @Test
+    void quando_atualizarRestauranteInexistente_deveRetornarStatusNotFound() throws Exception {
+        // Preparação
+        Long idInexistente = 99L;
+        RestauranteRequest request = new RestauranteRequest();
+        request.setNome("Nome Qualquer");
+        request.setTipoCozinha("Qualquer");
+        request.setHorarioAbertura(LocalTime.now());
+        request.setHorarioFechamento(LocalTime.now());
+        request.setDonoRestauranteId(1L);
+        request.setEnderecoId(1L);
+
+        when(findUsuarioUseCase.execute(1L)).thenReturn(new Usuario());
+
+        when(updateRestauranteUseCase.execute(eq(idInexistente), any(Restaurante.class)))
+                .thenThrow(new RestaurantNotFoundException("Restaurante com o id " + idInexistente + " não encontrado."));
+
+        // Ação e Verificação
+        mockMvc.perform(put("/restaurante/{id}", idInexistente)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void quando_atualizarRestauranteComDadosInvalidos_deveRetornarStatusBadRequest() throws Exception{
         // Preparação
         Long restauranteId = 1L;
@@ -292,6 +291,7 @@ public class RestauranteApiControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // Delete
     @Test
     void quando_deletarRestauranteExistente_deveRetornarStatusNoContent() throws Exception {
         // Preparação
