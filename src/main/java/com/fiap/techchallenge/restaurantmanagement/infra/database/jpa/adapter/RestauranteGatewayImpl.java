@@ -2,6 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.RestauranteGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.RestauranteEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
@@ -11,7 +12,6 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.UsuarioRepository;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.RestaurantNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.UserNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +35,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
         );
 
         EnderecoEntity enderecoEntity = enderecoRepository.findById(restaurante.getEndereco().getId()).orElseThrow(
-                () -> new EntityNotFoundException("Endereço não encontrado para associar ao restaurante")
+                () -> new EnderecoNotFoundException("Endereço não encontrado para associar ao restaurante")
         );
             RestauranteEntity restauranteEntity = restauranteMapper.toEntity(restaurante);
             restauranteEntity.setDonoRestaurante(usuarioEntity);
