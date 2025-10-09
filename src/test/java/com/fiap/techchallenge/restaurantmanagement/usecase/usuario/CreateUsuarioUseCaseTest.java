@@ -32,19 +32,16 @@ public class CreateUsuarioUseCaseTest {
         Long enderecoId = 1L;
         Usuario usuarioParaSalvar = new Usuario(null, "Humberto", "humberto@email.com", TipoUsuario.ADMIN, "12345678");
 
-        // Configurando o comportamento do Mock
         Usuario usuarioSalvo = new Usuario(1L, "Humberto", "humberto@email.com", TipoUsuario.CLIENTE, "12345678");
-        when(usuarioGateway.save(any(Usuario.class), anyLong())).thenReturn(usuarioSalvo); // 3. Definindo a regra do mock
+        when(usuarioGateway.save(any(Usuario.class), anyLong())).thenReturn(usuarioSalvo);
 
         // Ação (Act)
         Usuario resultado = createUsuarioUseCase.execute(usuarioParaSalvar, enderecoId);
 
         // Verificação (Assert)
         assertNotNull(resultado);
-        assertEquals(1L, resultado.getId()); // Verifica se o ID foi atribuído
+        assertEquals(1L, resultado.getId());
         assertEquals("Humberto", resultado.getNome());
-
-        // 4. Verificando se o método do mock foi chamado
         verify(usuarioGateway).save(usuarioParaSalvar, enderecoId);
     }
 }
