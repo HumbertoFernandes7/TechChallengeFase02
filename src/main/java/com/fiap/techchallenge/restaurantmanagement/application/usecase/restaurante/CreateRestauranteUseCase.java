@@ -19,7 +19,7 @@ public class CreateRestauranteUseCase {
             restaurante.associarEndereco(endereco);
             return restauranteGateway.save(restaurante);
         }else{
-            throw new BusinessRuleException("Usuario do tipo CLIENTE não pode ser dono de um restaurante");
+            throw new BusinessRuleException("Usuário do tipo CLIENTE não pode ser dono de um restaurante");
         }
     }
 }

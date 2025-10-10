@@ -1,13 +1,12 @@
 package com.fiap.techchallenge.restaurantmanagement.application.usecase.itemCardapio;
 
-import com.fiap.techchallenge.restaurantmanagement.application.gateway.CardapioGateway;
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.ItemCardapioGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.ItemCardapio;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FindItemCardapioUseCase {
 
     private final ItemCardapioGateway itemCardapioGateway;
