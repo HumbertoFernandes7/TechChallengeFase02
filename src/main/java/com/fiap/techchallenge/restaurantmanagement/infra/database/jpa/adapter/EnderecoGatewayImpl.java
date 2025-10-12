@@ -7,6 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.End
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
