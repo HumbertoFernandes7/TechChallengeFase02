@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class UpdateEstadoUseCase {
     private final EstadoGateway estadoGateway;
 
-    public Estado execute(Long id, Estado estadoAtualizado){
-        return estadoGateway.update(id, estadoAtualizado);
+    public Estado execute(Estado estadoAtualizado){
+        return estadoGateway.update(estadoAtualizado);
     }
 }

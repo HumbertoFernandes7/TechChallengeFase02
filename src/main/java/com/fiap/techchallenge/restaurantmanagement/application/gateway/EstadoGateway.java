@@ -8,7 +8,7 @@ public interface EstadoGateway {
 
     Estado save(Estado estado);
 
-    Estado update(Long id, Estado estadoAtualizado);
+    Estado update(Estado estadoAtualizado);
 
     Estado findById(Long id);
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Component
 @AllArgsConstructor
 public class CidadeGatewayImpl implements CidadeGateway {
@@ -29,8 +30,8 @@ public class CidadeGatewayImpl implements CidadeGateway {
     }
 
     @Override
-    public Cidade update(Long id, Cidade cidadeAtualizada) {
-        CidadeEntity cidadeEntity = cidadeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cidade com o id " + id + " não encontrado."));
+    public Cidade update(Cidade cidadeAtualizada) {
+        CidadeEntity cidadeEntity = cidadeRepository.findById(cidadeAtualizada.getId()).orElseThrow(() -> new EntityNotFoundException("Cidade com o id " + cidadeAtualizada.getId() + " não encontrado."));
         cidadeEntity.setNome(cidadeAtualizada.getNome());
         //esse ponto aqui pode causar falha
         cidadeEntity.setEstado(estadoRepository.findById(cidadeAtualizada.getEstado().getId()).get());

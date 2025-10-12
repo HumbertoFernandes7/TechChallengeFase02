@@ -29,8 +29,8 @@ public class EnderecoGatewayImpl implements EnderecoGateway {
     }
 
     @Override
-    public Endereco update(Long id, Endereco enderecoAtualizado) {
-        EnderecoEntity enderecoEntity = enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Endereço com o id " + id + " não encontrado."));
+    public Endereco update(Endereco enderecoAtualizado) {
+        EnderecoEntity enderecoEntity = enderecoRepository.findById(enderecoAtualizado.getId()).orElseThrow(() -> new EntityNotFoundException("Endereço com o id " + enderecoAtualizado.getId() + " não encontrado."));
         enderecoEntity.setLogradouro(enderecoAtualizado.getLogradouro());
         enderecoEntity.setNumero(enderecoAtualizado.getNumero());
         enderecoEntity.setComplemento(enderecoAtualizado.getComplemento());
