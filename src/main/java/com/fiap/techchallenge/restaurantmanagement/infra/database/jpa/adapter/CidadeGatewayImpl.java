@@ -7,15 +7,14 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Cid
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CidadeMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CidadeGatewayImpl implements CidadeGateway {
 
     private final CidadeRepository cidadeRepository;
@@ -33,7 +32,6 @@ public class CidadeGatewayImpl implements CidadeGateway {
     public Cidade update(Cidade cidadeAtualizada) {
         CidadeEntity cidadeEntity = cidadeRepository.findById(cidadeAtualizada.getId()).orElseThrow(() -> new CidadeNotFoundException("Cidade com o id " + cidadeAtualizada.getId() + " não encontrado."));
         cidadeEntity.setNome(cidadeAtualizada.getNome());
-        //esse ponto aqui pode causar falha
         cidadeEntity.setEstado(estadoRepository.findById(cidadeAtualizada.getEstado().getId()).get());
         CidadeEntity save = cidadeRepository.save(cidadeEntity);
         return cidadeMapper.toDomain(save);
