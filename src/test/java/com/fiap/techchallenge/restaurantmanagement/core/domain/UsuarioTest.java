@@ -15,6 +15,20 @@ public class UsuarioTest {
     }
 
     @Test
+    void quando_chamarUpdateUsuario_deveAtualizarOsDadosCorretamente() {
+        // Preparação
+        Usuario usuario = new Usuario(1L, "Nome Antigo", "antigo@email.com", TipoUsuario.ADMIN, "12345678");
+
+        // Ação
+        usuario.updateUsuario("Nome Novo", "novo@email.com", TipoUsuario.CLIENTE);
+
+        // Verificação
+        assertEquals("Nome Novo", usuario.getNome());
+        assertEquals("novo@email.com", usuario.getEmail());
+        assertEquals(TipoUsuario.CLIENTE, usuario.getTipo());
+    }
+
+    @Test
     void quando_criarUsuarioComSenhaInvalida_deveLancarExcecao() {
         InvalidPasswordException exception = assertThrows(InvalidPasswordException.class, () -> {
             new Usuario(1L, "Humberto Fernandes", "humberto@email.com", TipoUsuario.ADMIN, "senha");
