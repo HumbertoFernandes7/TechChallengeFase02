@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +37,7 @@ public class CidadeGatewayImplTest {
     private EstadoRepository estadoRepository;
 
     private EstadoEntity estadoSalvo;
+    private EstadoEntity outroEstadoSalvo;
 
     @BeforeEach
     void setUp() {
@@ -109,4 +111,54 @@ public class CidadeGatewayImplTest {
         Optional<CidadeEntity> resultado = cidadeRepository.findById(id);
         assertThat(resultado).isNotPresent();
     }
+
+    @Test
+    void quando_update_deveAtualizarCidadeComSucesso() {
+        // Preparação
+        Estado estadoDominio = new Estado(estadoSalvo.getId(), estadoSalvo.getNome(), estadoSalvo.getSigla());
+        Cidade cidadeOriginal = cidadeGateway.save(new Cidade(1L, "Nome Antigo", estadoDominio));
+
+        Estado outroEstadoDominio = new Estado(outroEstadoSalvo.getId(), outroEstadoSalvo.getNome(), outroEstadoSalvo.getSigla());
+        Cidade cidadeAtualizada = new Cidade(cidadeOriginal.getId(), "Nome Novo", outroEstadoDominio);
+
+        // Ação
+        Cidade resultado = cidadeGateway.update(cidadeAtualizada);
+
+        // Verificação
+        assertThat(resultado).isNotNull();
+        assertThat(resultado.getId()).isEqualTo(cidadeOriginal.getId());
+        assertThat(resultado.getNome()).isEqualTo("Nome Novo");
+        assertThat(resultado.getEstado().getId()).isEqualTo(outroEstadoSalvo.getId());
+    }
+
+    @Test
+    void quando_updateCidadeInexistente_deveLancarExcecao() {
+        // Preparação
+        Estado estadoDominio = new Estado(estadoSalvo.getId(), estadoSalvo.getNome(), estadoSalvo.getSigla());
+        Cidade cidadeInexistente = new Cidade(99L, "Cidade Inexistente", estadoDominio);
+
+        // Ação e Verificação
+        CidadeNotFoundException exception = assertThrows(
+                CidadeNotFoundException.class,
+                () -> cidadeGateway.update(cidadeInexistente)
+        );
+        assertThat(exception.getMessage()).isEqualTo("Cidade com o id 99 não encontrado.");
+    }
+
+    @Test
+    void quando_updateComEstadoInexistente_deveLancarExcecao() {
+        // Preparação
+        Estado estadoDominio = new Estado(estadoSalvo.getId(), estadoSalvo.getNome(), estadoSalvo.getSigla());
+        Cidade cidadeOriginal = cidadeGateway.save(new Cidade(null, "Cidade Teste", estadoDominio));
+
+        Estado estadoInexistente = new Estado(999L, "Estado Inexistente", "XX");
+        Cidade cidadeParaAtualizar = new Cidade(cidadeOriginal.getId(), "Nome Novo", estadoInexistente);
+
+        // Ação e Verificação
+        // Verifica a NoSuchElementException, que é a exceção lançada pelo .get() no código original
+        assertThrows(NoSuchElementException.class, () -> {
+            cidadeGateway.update(cidadeParaAtualizar);
+        });
+    }
+
 }
