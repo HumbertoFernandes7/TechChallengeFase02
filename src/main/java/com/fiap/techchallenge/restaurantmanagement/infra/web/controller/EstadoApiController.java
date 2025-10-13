@@ -2,7 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.web.controller;
 
 import com.fiap.techchallenge.restaurantmanagement.application.usecase.estado.*;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Estado;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estado")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EstadoApiController implements IEstadoApiController<Estado> {
 
     private final CreateEstadoUseCase createEstadoUseCase;

@@ -1,11 +1,11 @@
 package com.fiap.techchallenge.restaurantmanagement.application.usecase.estado;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.EstadoGateway;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DeleteEstadoUseCase {
 
     private final EstadoGateway estadoGateway;

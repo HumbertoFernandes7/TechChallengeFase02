@@ -6,14 +6,14 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Est
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EstadoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EstadoNotFoundException;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EstadoGatewayImpl implements EstadoGateway {
 
     private final EstadoRepository estadoRepository;
