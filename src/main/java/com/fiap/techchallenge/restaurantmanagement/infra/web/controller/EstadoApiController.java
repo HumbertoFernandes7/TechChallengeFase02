@@ -40,8 +40,8 @@ public class EstadoApiController implements IEstadoApiController<Estado> {
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, Estado estado) {
-        estado = updateEstadoUseCase.execute(id, estado);
+    public ResponseEntity<Void> update(Estado estado) {
+        estado = updateEstadoUseCase.execute(estado);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + estado.getId()).buildAndExpand(estado.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }

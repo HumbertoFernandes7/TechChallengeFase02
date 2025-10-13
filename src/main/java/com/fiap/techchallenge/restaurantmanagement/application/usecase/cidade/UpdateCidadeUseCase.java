@@ -11,7 +11,7 @@ public class UpdateCidadeUseCase {
 
     private final CidadeGateway cidadeGateway;
 
-    public Cidade execute(Long id, Cidade cidadeAtualizado) {
-        return cidadeGateway.update(id, cidadeAtualizado);
+    public Cidade execute(Cidade cidadeAtualizado) {
+        return cidadeGateway.update(cidadeAtualizado);
     }
 }

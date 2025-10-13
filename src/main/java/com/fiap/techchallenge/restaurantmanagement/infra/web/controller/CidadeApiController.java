@@ -41,8 +41,8 @@ public class CidadeApiController implements ICidadeApiController<Cidade> {
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, Cidade cidade) {
-        cidade = updateCidadeUseCase.execute(id, cidade);
+    public ResponseEntity<Void> update(Cidade cidade) {
+        cidade = updateCidadeUseCase.execute(cidade);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + cidade.getId()).buildAndExpand(cidade.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
