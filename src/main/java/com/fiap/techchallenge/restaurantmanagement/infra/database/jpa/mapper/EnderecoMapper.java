@@ -21,8 +21,8 @@ public class EnderecoMapper {
                 enderecoEntity.getLogradouro(),
                 enderecoEntity.getNumero(),
                 enderecoEntity.getComplemento(),
-                enderecoEntity.getCep(),
                 enderecoEntity.getBairro(),
+                enderecoEntity.getCep(),
                 cidadeMapper.toDomain(enderecoEntity.getCidade()));
     }
 
@@ -35,8 +35,8 @@ public class EnderecoMapper {
                 endereco.getLogradouro(),
                 endereco.getNumero(),
                 endereco.getComplemento(),
-                endereco.getCep(),
                 endereco.getBairro(),
+                endereco.getCep(),
                 cidadeMapper.toEntity(endereco.getCidade()));
     }
 
