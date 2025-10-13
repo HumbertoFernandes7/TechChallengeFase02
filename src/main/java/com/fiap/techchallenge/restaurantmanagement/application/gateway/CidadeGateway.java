@@ -8,7 +8,7 @@ public interface CidadeGateway {
 
     Cidade save(Cidade cidade);
 
-    Cidade update(Long id, Cidade cidadeAtualizada);
+    Cidade update(Cidade cidadeAtualizada);
 
     Cidade findById(Long id);
 

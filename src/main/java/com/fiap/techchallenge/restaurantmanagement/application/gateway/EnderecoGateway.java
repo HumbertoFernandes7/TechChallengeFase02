@@ -8,7 +8,7 @@ public interface EnderecoGateway {
 
     Endereco save(Endereco endereco);
 
-    Endereco update(Long id, Endereco enderecoAtualizado);
+    Endereco update(Endereco enderecoAtualizado);
 
     Endereco findById(Long id);
 

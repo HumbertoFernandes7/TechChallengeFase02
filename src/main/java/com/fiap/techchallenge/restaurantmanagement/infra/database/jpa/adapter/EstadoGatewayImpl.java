@@ -6,14 +6,14 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.Est
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EstadoMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EstadoRepository;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EstadoNotFoundException;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EstadoGatewayImpl implements EstadoGateway {
 
     private final EstadoRepository estadoRepository;
@@ -27,9 +27,9 @@ public class EstadoGatewayImpl implements EstadoGateway {
     }
 
     @Override
-    public Estado update(Long id, Estado estadoAtualizado) {
-        EstadoEntity estadoEntity = estadoRepository.findById(id)
-                .orElseThrow(() -> new EstadoNotFoundException("Estado com o id " + id + " não encontrado."));
+    public Estado update(Estado estadoAtualizado) {
+        EstadoEntity estadoEntity = estadoRepository.findById(estadoAtualizado.getId())
+                .orElseThrow(() -> new EstadoNotFoundException("Estado com o id " + estadoAtualizado.getId() + " não encontrado."));
 
         estadoEntity.setNome(estadoAtualizado.getNome());
         estadoEntity.setSigla(estadoAtualizado.getSigla());
@@ -45,7 +45,7 @@ public class EstadoGatewayImpl implements EstadoGateway {
 
     @Override
     public List<Estado> findAll() {
-        return  estadoRepository.findAll()
+        return estadoRepository.findAll()
                 .stream()
                 .map(estadoMapper::toDomain)
                 .collect(Collectors.toList());

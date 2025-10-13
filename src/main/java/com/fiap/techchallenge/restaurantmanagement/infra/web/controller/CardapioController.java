@@ -7,7 +7,7 @@ import com.fiap.techchallenge.restaurantmanagement.core.domain.Restaurante;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.CardapioRequest;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.dto.CardapioResponse;
 import com.fiap.techchallenge.restaurantmanagement.infra.web.mapper.CardapioWebMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/cardapio")
 public class CardapioController implements ICardapioController {
 
