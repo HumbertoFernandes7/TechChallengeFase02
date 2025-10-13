@@ -45,6 +45,11 @@ public class CidadeGatewayImplTest {
         estado.setNome("estado");
         estado.setSigla("SP");
         estadoSalvo = estadoRepository.save(estado);
+
+        EstadoEntity outroEstado = new EstadoEntity();
+        outroEstado.setNome("Outro Estado");
+        outroEstado.setSigla("RJ");
+        outroEstadoSalvo = estadoRepository.save(outroEstado);
     }
 
     @Test
@@ -116,7 +121,7 @@ public class CidadeGatewayImplTest {
     void quando_update_deveAtualizarCidadeComSucesso() {
         // Preparação
         Estado estadoDominio = new Estado(estadoSalvo.getId(), estadoSalvo.getNome(), estadoSalvo.getSigla());
-        Cidade cidadeOriginal = cidadeGateway.save(new Cidade(1L, "Nome Antigo", estadoDominio));
+        Cidade cidadeOriginal = cidadeGateway.save(new Cidade(null, "Nome Antigo", estadoDominio));
 
         Estado outroEstadoDominio = new Estado(outroEstadoSalvo.getId(), outroEstadoSalvo.getNome(), outroEstadoSalvo.getSigla());
         Cidade cidadeAtualizada = new Cidade(cidadeOriginal.getId(), "Nome Novo", outroEstadoDominio);
