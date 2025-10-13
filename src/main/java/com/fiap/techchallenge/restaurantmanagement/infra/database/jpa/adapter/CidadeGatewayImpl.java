@@ -2,6 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.CidadeGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Cidade;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.CidadeNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.CidadeEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.CidadeMapper;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
@@ -31,7 +32,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
 
     @Override
     public Cidade update(Cidade cidadeAtualizada) {
-        CidadeEntity cidadeEntity = cidadeRepository.findById(cidadeAtualizada.getId()).orElseThrow(() -> new EntityNotFoundException("Cidade com o id " + cidadeAtualizada.getId() + " não encontrado."));
+        CidadeEntity cidadeEntity = cidadeRepository.findById(cidadeAtualizada.getId()).orElseThrow(() -> new CidadeNotFoundException("Cidade com o id " + cidadeAtualizada.getId() + " não encontrado."));
         cidadeEntity.setNome(cidadeAtualizada.getNome());
         //esse ponto aqui pode causar falha
         cidadeEntity.setEstado(estadoRepository.findById(cidadeAtualizada.getEstado().getId()).get());
@@ -42,7 +43,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
     @Override
     public Cidade findById(Long id) {
         return cidadeRepository.findById(id).map(cidadeMapper::toDomain).orElseThrow(
-                () -> new EntityNotFoundException("Cidade não encontrado"));
+                () -> new CidadeNotFoundException("Cidade não encontrado"));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class CidadeGatewayImpl implements CidadeGateway {
     @Override
     public void deleteById(Long id) {
         if (!cidadeRepository.existsById(id)) {
-            throw new EntityNotFoundException("Cidade com o id " + id + " não encontrado.");
+            throw new CidadeNotFoundException("Cidade com o id " + id + " não encontrado.");
         }
         cidadeRepository.deleteById(id);
     }
