@@ -15,11 +15,14 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -34,7 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.is;
 
-@WebMvcTest(UsuarioApiController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class UsuarioApiControllerTest {
 
@@ -44,72 +48,23 @@ public class UsuarioApiControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @MockitoBean
     private CreateUsuarioUseCase createUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private ListUsuarioUseCase listUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private FindUsuarioUseCase findUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private UpdateUsuarioUseCase updateUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private DeleteUsuarioUseCase deleteUsuarioUseCase;
 
-    @Autowired
+    @MockitoBean
     private ChangePasswordUseCase changePasswordUseCase;
-
-    @TestConfiguration
-    static class TestConfig {
-        // Para cada dependência do nosso controller, criamos um @Bean que retorna um mock.
-        @Bean
-        public CreateUsuarioUseCase createUsuarioUseCase() {
-            return mock(CreateUsuarioUseCase.class);
-        }
-
-        @Bean
-        public FindUsuarioUseCase findUsuarioUseCase() {
-            return mock(FindUsuarioUseCase.class);
-        }
-
-        @Bean
-        public UpdateUsuarioUseCase updateUsuarioUseCase() {
-            return mock(UpdateUsuarioUseCase.class);
-        }
-
-        @Bean
-        public DeleteUsuarioUseCase deleteUsuarioUseCase() {
-            return mock(DeleteUsuarioUseCase.class);
-        }
-
-        @Bean
-        public ListUsuarioUseCase listUsuarioUseCase() {
-            return mock(ListUsuarioUseCase.class);
-        }
-
-        @Bean
-        public ChangePasswordUseCase changePasswordUseCase() {
-            return mock(ChangePasswordUseCase.class);
-        }
-
-        @Bean
-        public UsuarioWebMapper usuarioWebMapper() {
-            return new UsuarioWebMapper(modelMapper());
-        }
-
-        @Bean
-        public ModelMapper modelMapper() {
-            return new ModelMapper();
-        }
-
-        @Bean
-        public FindEnderecoUseCase findEnderecoUseCase() {
-            return mock(FindEnderecoUseCase.class);
-        }
-    }
 
     // Post
     @Test

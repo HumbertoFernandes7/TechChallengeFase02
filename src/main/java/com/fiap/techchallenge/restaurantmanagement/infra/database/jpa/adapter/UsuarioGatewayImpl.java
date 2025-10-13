@@ -2,6 +2,7 @@ package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.UsuarioGateway;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.Usuario;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.UsuarioEntity;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.UsuarioMapper;
@@ -27,7 +28,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public Usuario save(Usuario usuario, Long enderecoId) {
         EnderecoEntity enderecoEntity = enderecoRepository.findById(enderecoId)
-                .orElseThrow(() -> new UserNotFoundException("Usuario com id" + enderecoId +" não encontrado "));
+                .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado para associar ao usuário"));
 
         UsuarioEntity usuarioEntity = usuarioMapper.toEntity(usuario);
         usuarioEntity.setEndereco(enderecoEntity);
@@ -49,7 +50,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).map(usuarioMapper::toDomain).orElseThrow(
-                () -> new UserNotFoundException("Usuario com id" + id +" não encontrado "));
+                () -> new UserNotFoundException("Usuário com id: " + id +" não encontrado"));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public void deleteById(Long id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new UserNotFoundException("Usuario com id" + id +" não encontrado ");
+            throw new UserNotFoundException("Usuário com id: " + id +" não encontrado");
         }
         usuarioRepository.deleteById(id);
     }

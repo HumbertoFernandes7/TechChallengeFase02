@@ -7,15 +7,14 @@ import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.End
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
 import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
 import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EnderecoGatewayImpl implements EnderecoGateway {
     private final EnderecoRepository enderecoRepository;
     private final EnderecoMapper enderecoMapper;
