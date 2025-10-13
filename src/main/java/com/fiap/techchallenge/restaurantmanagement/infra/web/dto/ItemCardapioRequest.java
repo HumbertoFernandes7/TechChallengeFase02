@@ -14,16 +14,16 @@ public class ItemCardapioRequest {
     @NotBlank(message = "nome é obrigatório")
     private String nome;
 
-    @NotBlank(message = "descrição é obrigatoria")
+    @NotBlank(message = "descrição é obrigatória")
     private String descricao;
 
-    @NotNull(message = "preço é obrigatorio")
+    @NotNull(message = "preço é obrigatório")
     private BigDecimal preco;
 
-    @NotNull(message = "desponibilidade é obrigatoria")
+    @NotNull(message = "disponibilidade é obrigatória")
     private boolean disponibilidade;
 
-    @NotBlank(message = "foto é obrigatoria")
+    @NotBlank(message = "foto é obrigatória")
     private String fotoPrato;
 
     private Long cardapioId;
