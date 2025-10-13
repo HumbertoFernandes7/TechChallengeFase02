@@ -1,11 +1,11 @@
 package com.fiap.techchallenge.restaurantmanagement.application.usecase.restaurante;
 
 import com.fiap.techchallenge.restaurantmanagement.application.gateway.RestauranteGateway;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DeleteRestauranteUseCase {
 
     private final RestauranteGateway restauranteGateway;

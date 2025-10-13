@@ -28,7 +28,7 @@ public class UsuarioEntity {
 
     private String senha;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "endereco_id")
     private EnderecoEntity endereco;
 }
