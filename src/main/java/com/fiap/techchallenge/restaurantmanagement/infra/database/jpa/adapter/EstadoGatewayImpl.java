@@ -27,9 +27,9 @@ public class EstadoGatewayImpl implements EstadoGateway {
     }
 
     @Override
-    public Estado update(Long id, Estado estadoAtualizado) {
-        EstadoEntity estadoEntity = estadoRepository.findById(id)
-                .orElseThrow(() -> new EstadoNotFoundException("Estado com o id " + id + " não encontrado."));
+    public Estado update(Estado estadoAtualizado) {
+        EstadoEntity estadoEntity = estadoRepository.findById(estadoAtualizado.getId())
+                .orElseThrow(() -> new EstadoNotFoundException("Estado com o id " + estadoAtualizado.getId() + " não encontrado."));
 
         estadoEntity.setNome(estadoAtualizado.getNome());
         estadoEntity.setSigla(estadoAtualizado.getSigla());
@@ -45,7 +45,7 @@ public class EstadoGatewayImpl implements EstadoGateway {
 
     @Override
     public List<Estado> findAll() {
-        return  estadoRepository.findAll()
+        return estadoRepository.findAll()
                 .stream()
                 .map(estadoMapper::toDomain)
                 .collect(Collectors.toList());

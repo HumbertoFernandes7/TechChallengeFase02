@@ -11,8 +11,8 @@ public class UpdateEnderecoUseCase {
 
     private final EnderecoGateway enderecoGateway;
 
-    public Endereco execute(Long id, Endereco enderecoAtualizado) {
-        return enderecoGateway.update(id, enderecoAtualizado);
+    public Endereco execute(Endereco enderecoAtualizado) {
+        return enderecoGateway.update(enderecoAtualizado);
     }
 
 }

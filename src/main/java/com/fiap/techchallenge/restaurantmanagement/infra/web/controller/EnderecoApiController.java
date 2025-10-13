@@ -42,8 +42,8 @@ public class EnderecoApiController implements IEnderecoApiController<Endereco> {
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, Endereco endereco) {
-        endereco = updateEnderecoUseCase.execute(id, endereco);
+    public ResponseEntity<Void> update(Endereco endereco) {
+        endereco = updateEnderecoUseCase.execute(endereco);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + endereco.getId()).build().toUri();
         return ResponseEntity.created(uri).build();
     }
