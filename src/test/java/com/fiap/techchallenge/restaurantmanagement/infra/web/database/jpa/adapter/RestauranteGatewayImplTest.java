@@ -64,43 +64,45 @@ public class RestauranteGatewayImplTest {
         EstadoEntity estadoEntity = new EstadoEntity();
         estadoEntity.setNome("São Paulo");
         estadoEntity.setSigla("SP");
-        EstadoEntity estadoSalvo = estadoRepository.save(estadoEntity);
+        EstadoEntity estadoSalvoDb = estadoRepository.save(estadoEntity);
 
         CidadeEntity cidadeEntity = new CidadeEntity();
         cidadeEntity.setNome("São Paulo");
-        cidadeEntity.setEstado(estadoSalvo);
-        CidadeEntity cidadeSalva = cidadeRepository.save(cidadeEntity);
+        cidadeEntity.setEstado(estadoSalvoDb);
+        CidadeEntity cidadeSalvaDb = cidadeRepository.save(cidadeEntity);
 
-        EnderecoEntity endereco = new EnderecoEntity();
-        endereco.setLogradouro("Logradouro");
-        endereco.setNumero("123");
-        endereco.setBairro("Bairro");
-        endereco.setCep("12345-678");
-        endereco.setCidade(cidadeSalva);
-        enderecoSalvo = enderecoMapper.toDomain(enderecoRepository.save(endereco));
+        EnderecoEntity endereco1 = new EnderecoEntity();
+        endereco1.setLogradouro("Logradouro");
+        endereco1.setNumero("123");
+        endereco1.setBairro("Bairro");
+        endereco1.setCep("12345-678");
+        endereco1.setCidade(cidadeSalvaDb);
+        EnderecoEntity enderecoSalvo1Db = enderecoRepository.save(endereco1);
+        enderecoSalvo = enderecoMapper.toDomain(enderecoSalvo1Db);
 
         EnderecoEntity endereco2 = new EnderecoEntity();
         endereco2.setLogradouro("Logradouro2");
         endereco2.setNumero("123");
         endereco2.setBairro("Bairro");
         endereco2.setCep("12345-678");
-        endereco2.setCidade(cidadeSalva);
-        endereco2Salvo = enderecoMapper.toDomain(enderecoRepository.save(endereco2));
+        endereco2.setCidade(cidadeSalvaDb);
+        EnderecoEntity enderecoSalvo2Db = enderecoRepository.save(endereco2);
+        endereco2Salvo = enderecoMapper.toDomain(enderecoSalvo2Db);
 
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setNome("Humberto");
-        usuario.setEmail("humberto@email.com");
-        usuario.setSenha("12345678");
-        usuario.setEndereco(new EnderecoEntity());
-        usuario.setTipo(TipoUsuario.ADMIN);
-        usuarioSalvo = usuarioMapper.toDomain(usuarioRepository.save(usuario));
+        UsuarioEntity usuario1 = new UsuarioEntity();
+        usuario1.setNome("Humberto");
+        usuario1.setEmail("humberto@email.com");
+        usuario1.setSenha("12345678");
+        usuario1.setTipo(TipoUsuario.ADMIN);
+        usuario1.setEndereco(enderecoSalvo1Db); // Correção: Associar entidade persistida
+        usuarioSalvo = usuarioMapper.toDomain(usuarioRepository.save(usuario1));
 
         UsuarioEntity usuario2 = new UsuarioEntity();
         usuario2.setNome("Humberto2");
         usuario2.setEmail("humberto@email.com");
         usuario2.setSenha("12345678");
-        usuario2.setEndereco(new EnderecoEntity());
         usuario2.setTipo(TipoUsuario.ADMIN);
+        usuario2.setEndereco(enderecoSalvo2Db); // Correção: Associar entidade persistida
         usuario2Salvo = usuarioMapper.toDomain(usuarioRepository.save(usuario2));
     }
 
@@ -275,4 +277,3 @@ public class RestauranteGatewayImplTest {
         assertEquals("Restaurante com o id 99 não encontrado.", exception.getMessage());
     }
 }
-
