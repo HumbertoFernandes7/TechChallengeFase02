@@ -27,7 +27,6 @@ public class FindCidadeUseCaseTest {
 
     @Test
     public void TestFindCidadeUseCase() {
-
         Long cidadeID = 1L;
         Cidade cidadeEsperado = new Cidade(cidadeID,"Cidade Teste",estadoGateway.findById(1L));
         Mockito.when(cidadeGateway.findById(cidadeID)).thenReturn(cidadeEsperado);
@@ -35,5 +34,4 @@ public class FindCidadeUseCaseTest {
         Assertions.assertNotNull(cidade);
         assertEquals("Cidade Teste",cidade.getNome());
     }
-
 }

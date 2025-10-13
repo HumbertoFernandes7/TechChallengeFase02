@@ -26,7 +26,6 @@ public class UpdateCidadeUseCaseTest {
 
     @Test
     public void testUpdateCidadeUseCaseSuccess() {
-
         Cidade cidade = new Cidade(1L, "Cidade Teste", estadoGateway.findById(1L));
         Cidade cidadeAtualizar = new Cidade(2L, "Cidade Teste Atualizada", estadoGateway.findById(2L));
         Mockito.when(cidadeGateway.update(Mockito.any(Cidade.class))).thenAnswer(invocationOnMock ->
