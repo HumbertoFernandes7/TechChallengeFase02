@@ -9,7 +9,7 @@ class CardapioTest {
     @Test
     void quando_criarCardapioComRestaurante_deveAtribuirCorretamente() {
 
-        Restaurante restaurante = new Restaurante();
+        Restaurante restaurante = new Restaurante("Restaurante Teste", "Brasileira", null, null, null);
 
         Cardapio cardapio = new Cardapio(restaurante);
 
