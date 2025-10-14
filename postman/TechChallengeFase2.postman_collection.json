@@ -1,0 +1,1123 @@
+{
+	"info": {
+		"_postman_id": "5d96efc1-3a34-47b0-8f63-d3ab5918e529",
+		"name": "TechChallengeFase2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22746679",
+		"_collection_link": "https://blue-water-108843.postman.co/workspace/P%C3%B3s-FIAP~890527fe-85c4-4c8e-acd3-34250c833187/collection/907062-5d96efc1-3a34-47b0-8f63-d3ab5918e529?action=share&source=collection_link&creator=22746679"
+	},
+	"item": [
+		{
+			"name": "01-Estado",
+			"item": [
+				{
+					"name": "Get Estado by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estado/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Estados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estado",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Estado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"São Paulo\",\r\n    \"sigla\": \"SP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/estado",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"São Paulo atualizado\",\r\n    \"sigla\": \"SP atualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/estado",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Estado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/estado/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estado",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02-Cidade",
+			"item": [
+				{
+					"name": "Get Cidade By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cidade/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cidade",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Cidade",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cidade",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Cidade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"jundiai\",\r\n    \"estado\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cidade",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Cidade",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"jundiai atualizado\",\r\n    \"estado\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cidade",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cidade",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cidade/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cidade",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03-Endereco",
+			"item": [
+				{
+					"name": "Get All Endereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/endereco",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Endereco By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/endereco/4",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"endereco",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Endereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logradouro\": \"Aristodemo Gazzotti\",\r\n    \"complemento\": \"casa\",\r\n    \"bairro\": \"Vila das Belezas\",\r\n    \"numero\":\"738\",\r\n    \"cep\": \"05840-020\",\r\n    \"cidade\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/endereco",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Endereco",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"logradouro\": \"Aristodemo Gazzotti atualizado\",\r\n    \"complemento\": \"casa atualizado\",\r\n    \"bairro\": \"Vila das Belezas atualizado\",\r\n    \"numero\":\"738 atualizado\",\r\n    \"cep\": \"05840-020 atualizado\",\r\n    \"cidade\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/endereco",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Endereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/endereco/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "04-Usuario",
+			"item": [
+				{
+					"name": "cadastra usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"123456789\",\r\n    \"tipo\" : \"CLIENTE\",\r\n    \"enderecoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"humberto atualizado2\",\r\n    \"email\": \"humberto2@email.com\",\r\n    \"tipo\" : \"DONO_RESTAURANTE\",\r\n    \"senha\": \"12345678\",\r\n    \"enderecoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar senha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novaSenha\" : \"senhaAlterada\",\r\n    \"repetirNovaSenha\": \"senhaAlterada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios/1/change-password",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"1",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar todos os usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar usuario pelo id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar usuario pelo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"humberto\",\r\n    \"email\": \"humberto@email.com\",\r\n    \"senha\": \"1234\",\r\n    \"tipo\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "05-Restaurante",
+			"item": [
+				{
+					"name": "Cadastra restaurante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Padaria da Vila\",\r\n    \"tipoCozinha\": \"Padaria\",\r\n    \"horarioAbertura\": \"10:00:00\",\r\n    \"horarioFechamento\": \"22:00:00\",\r\n    \"donoRestauranteId\" : 1,\r\n    \"enderecoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/restaurante",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar restaurante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Padaria da Vila atualizada\",\r\n    \"tipoCozinha\": \"Padaria atualizada\",\r\n    \"horarioAbertura\": \"09:00:00\",\r\n    \"horarioFechamento\": \"20:00:00\",\r\n    \"donoRestauranteId\" : 1,\r\n    \"enderecoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/restaurante/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar restaurante pelo id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Padaria da Vila\",\r\n    \"tipoCozinha\": \"Padaria\",\r\n    \"horarioAbertura\": \"10:00:00\",\r\n    \"horarioFechamento\": \"22:00:00\",\r\n    \"donoRestauranteId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/restaurante/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar todos os restaurantes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Padaria da Vila\",\r\n    \"tipoCozinha\": \"Padaria\",\r\n    \"horarioAbertura\": \"10:00:00\",\r\n    \"horarioFechamento\": \"22:00:00\",\r\n    \"donoRestauranteId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/restaurante",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar restaurante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/restaurante/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "06-Cardapio",
+			"item": [
+				{
+					"name": "Cadastra cardapio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cardapio",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos cardapios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cardapio",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar cardapio por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cardapio/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar cardapio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cardapio/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "07-Item",
+			"item": [
+				{
+					"name": "Cadastra item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Arroz branco\",\r\n    \"descricao\": \"100g de arroz branco\",\r\n    \"preco\": 24.90,\r\n    \"disponibilidade\": true,\r\n    \"fotoPrato\": \"foto.url\",\r\n    \"cardapioId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/item",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos itens",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/item",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar item por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/item/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Arroz integral\",\r\n    \"descricao\": \"100g de arroz integral\",\r\n    \"preco\": 25.90,\r\n    \"disponibilidade\": false,\r\n    \"fotoPrato\": \"foto.url2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/item/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuZXN0ZXItYXBpIiwic3ViIjoiaHVtYmVydG9mZXJuYW5kZXMwOEBob3RtYWlsLmNvbSIsImV4cCI6MTc0ODk4MTIxOCwicm9sZSI6IkFETUlOIn0.kU7PNeyJaojHkVPfHX7r6-ZxWyuvHM_dtbV5qntRxxY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/item/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

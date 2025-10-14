@@ -1,0 +1,65 @@
+package com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.adapter;
+
+import com.fiap.techchallenge.restaurantmanagement.application.gateway.EnderecoGateway;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.Endereco;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.entity.EnderecoEntity;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.mapper.EnderecoMapper;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.CidadeRepository;
+import com.fiap.techchallenge.restaurantmanagement.infra.database.jpa.repository.EnderecoRepository;
+import com.fiap.techchallenge.restaurantmanagement.core.domain.exception.EnderecoNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+@RequiredArgsConstructor
+public class EnderecoGatewayImpl implements EnderecoGateway {
+    private final EnderecoRepository enderecoRepository;
+    private final EnderecoMapper enderecoMapper;
+    private final CidadeRepository cidadeRepository;
+
+    @Override
+    public Endereco save(Endereco endereco) {
+        EnderecoEntity enderecoEntity = enderecoMapper.toEntity(endereco);
+        EnderecoEntity enderecoSalvo = enderecoRepository.save(enderecoEntity);
+        return enderecoMapper.toDomain(enderecoSalvo);
+    }
+
+    @Override
+    public Endereco update(Endereco enderecoAtualizado) {
+        EnderecoEntity enderecoEntity = enderecoRepository.findById(enderecoAtualizado.getId()).orElseThrow(() -> new EnderecoNotFoundException("Endereço com o id " + enderecoAtualizado.getId() + " não encontrado."));
+        enderecoEntity.setLogradouro(enderecoAtualizado.getLogradouro());
+        enderecoEntity.setNumero(enderecoAtualizado.getNumero());
+        enderecoEntity.setComplemento(enderecoAtualizado.getComplemento());
+        enderecoEntity.setCep(enderecoAtualizado.getCep());
+        enderecoEntity.setBairro(enderecoAtualizado.getBairro());
+        enderecoEntity.setCidade(cidadeRepository.findById(enderecoAtualizado.getCidade().getId()).get());
+        EnderecoEntity save = enderecoRepository.save(enderecoEntity);
+        return enderecoMapper.toDomain(save);
+
+    }
+
+    @Override
+    public Endereco findById(Long id) {
+        return enderecoRepository.findById(id).map(enderecoMapper::toDomain).orElseThrow(
+                () -> new EnderecoNotFoundException("Endereço com o id " + id + " não encontrado."));
+    }
+
+    @Override
+    public List<Endereco> findAll() {
+        return enderecoRepository.findAll()
+                .stream()
+                .map(enderecoMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (!enderecoRepository.existsById(id)) {
+            throw new EnderecoNotFoundException("Endereço com o id " + id + " não encontrado.");
+        }
+        enderecoRepository.deleteById(id);
+    }
+}
